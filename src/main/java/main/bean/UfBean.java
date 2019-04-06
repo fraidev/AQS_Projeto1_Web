@@ -92,16 +92,20 @@ public class UfBean implements Serializable {
 	@Transacional
 	public void confirmaInclusao() {
 		this.ufDao.adiciona(uf);
+		status = Status.pesquisando;
 	}
 	
 	@Transacional
 	public void confirmaAlteracao() {
 		this.ufDao.atualiza(uf);
+		this.selectedUf = null;
+		status = Status.pesquisando;
 	}
 	
 	@Transacional
 	public void solicitaExcluir() {
-		this.ufDao.remove(uf);
+		this.ufDao.remove(selectedUf);
+		this.selectedUf = null;
 	}
 	
 	@PostConstruct

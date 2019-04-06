@@ -73,7 +73,7 @@
 		<p:commandButton value="Sair"
 			rendered="#{ufBean.mostraPesquisa}"
 			style="float: right; position: relative; margin-top: 20px;"   
-			action="#{homeBean.back}" 
+			action="home" 
 			process="@form" 
 			update="@form"/>
 	</h:form>
@@ -85,7 +85,7 @@
 			<p:inputText id="nome" value="#{ufBean.uf.nome}" />
 			
 			<p:outputLabel value="Sigla " for="sigla" style="width: 200px;" />
-			<p:password id="sigla" value="#{ufBean.uf.sigla}"  />
+			<p:inputText id="sigla" value="#{ufBean.uf.sigla}"/>
 			
 			<p:spacer />
 			<h:panelGroup>
@@ -95,14 +95,14 @@
 					style="margin-top: 20px;"   
 					actionListener="#{ufBean.confirmaInclusao()}"
 					process="@form" 
-					update="@form"/>
+					update="@all"/>
 				<p:commandButton value="ConfirmarE"
 					rendered="#{ufBean.alterando}"
 					id="btn-alterar"
 					style="margin-top: 20px;"  
 					actionListener="#{ufBean.confirmaAlteracao()}" 
 					process="@form" 
-					update="@form"/>
+					update="@all"/>
 				<p:commandButton value="Cancelar"
 					actionListener="#{ufBean.cancelar()}"
 					id="btn-cancelar"
