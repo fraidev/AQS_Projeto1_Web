@@ -3,6 +3,7 @@ package bean;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 

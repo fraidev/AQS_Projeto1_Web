@@ -8,12 +8,12 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class BairroBean implements Serializable {
+public class CidadeBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@PostConstruct
 	public void init() {
-		System.out.println("BairroBean;");
+		System.out.println("CidadeBeana;");
 	}
 	
 	public String voltar() {

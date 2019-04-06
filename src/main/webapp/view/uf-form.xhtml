@@ -10,8 +10,10 @@
 </h:head>
 
 <h:body>
-    <p:commandButton value="Voltar" action="#{ufBean.voltar()}"/>
-	<p:commandButton value="Voltar" action="#{ufBean.voltar()}" process="@this"/>
+      <h:form>
+			<p>Uf</p>
+			<p:commandButton value="Voltar" action="#{ufBean.voltar()}"/>
+      </h:form>
 </h:body>
 
 </html>

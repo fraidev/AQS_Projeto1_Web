@@ -8,7 +8,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class BairroBean implements Serializable {
+public class EmpresaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@PostConstruct
