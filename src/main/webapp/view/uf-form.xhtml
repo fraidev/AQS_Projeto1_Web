@@ -39,10 +39,11 @@
 				update="@all"/>
 			
 			<p:commandButton value="Excluir"
+				actionListener="#{ufBean.solicitaExcluir()}"
 				style="margin-top: 20px;"
 				disabled="#{ufBean.desabilitaExclusao}"
 				process="@form" 
-				update="@form"/>
+				update="@all"/>
 		</p:panel>
 	</h:form>		
 		

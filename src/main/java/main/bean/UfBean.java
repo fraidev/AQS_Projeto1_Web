@@ -99,6 +99,11 @@ public class UfBean implements Serializable {
 		this.ufDao.atualiza(uf);
 	}
 	
+	@Transacional
+	public void solicitaExcluir() {
+		this.ufDao.remove(uf);
+	}
+	
 	@PostConstruct
 	public void init() {
 		System.out.println("@PostConstruct GestorLoginBean.init();");
