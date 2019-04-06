@@ -1,0 +1,5 @@
+<beans>
+	<interceptors>
+		<class>tx.GerenciadorDeTransacao</class>
+	</interceptors>
+</beans>

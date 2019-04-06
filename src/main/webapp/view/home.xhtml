@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Projeto Web - Login</title>
+	<link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
+</h:head>
+
+<h:body>
+	<h:form >
+		<p:commandButton value="UF" action="#{homeBean.openUf()}" process="@this"/>
+		<p:commandButton value="Cidade"   action="#{homeBean.openCidade()}"/>
+		<p:commandButton value="Bairro"   action="#{homeBean.openBairro()}"/>
+		<p:commandButton value="Empresa"   action="#{homeBean.openEmpresa()}"/>
+		<p:commandButton value="Fiscalizacao"   action="#{homeBean.openFiscalizacao()}"/>
+	</h:form>
+</h:body>
+
+</html>

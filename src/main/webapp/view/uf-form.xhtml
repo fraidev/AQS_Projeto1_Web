@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Projeto Web - Uf</title>
+	<link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
+</h:head>
+
+<h:body>
+    <p:commandButton value="Voltar" action="#{ufBean.voltar()}"/>
+	<p:commandButton value="Voltar" action="#{ufBean.voltar()}" process="@this"/>
+</h:body>
+
+</html>
