@@ -5,17 +5,17 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Projeto Web - Login</title>
+	<title>Projeto Web - Home</title>
 	<link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
 </h:head>
 
 <h:body>
 	<h:form >
 		<p:commandButton value="UF" action="uf-form" process="@form" update="@form"/>
-		<p:commandButton value="Cidade"   action="#{homeBean.openCidade()}"/>
-		<p:commandButton value="Bairro"   action="#{homeBean.openBairro()}"/>
-		<p:commandButton value="Empresa"   action="#{homeBean.openEmpresa()}"/>
-		<p:commandButton value="Fiscalizacao"   action="#{homeBean.openFiscalizacao()}"/>
+		<p:commandButton value="Cidade" action="cidade-form" process="@form" update="@form"/>
+		<p:commandButton value="Bairro"  action="bairro-form" process="@form" update="@form"/>
+		<p:commandButton value="Empresa" action="empresa-form" process="@form" update="@form"/>
+		<p:commandButton value="Fiscalizacao" action="fiscalizacao-form" process="@form" update="@form"/>
 	</h:form>
 </h:body>
 

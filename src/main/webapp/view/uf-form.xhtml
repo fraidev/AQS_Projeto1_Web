@@ -10,18 +10,6 @@
 </h:head>
 
 <h:body>
-	<h:form id="frmPesquisa" >
-		<p:panel style="width: 100%;" rendered="#{ufBean.mostraPesquisa}">
-			<p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
-			<p:inputText id="nome" value="#{ufBean.nome}" />
-
-			<p:commandButton value="Pesquisar"
-				style="float: right; position: relative;"   
-				actionListener="#{ufBean.pesquisar()}" 
-				process="@form" 
-				update="@form :frmDataGrid :frmAcoes"/>
-		</p:panel>
-	</h:form>
 	
       <h:form id="frmAcoes" >
 		<p:panel rendered="#{ufBean.mostraPesquisa}">
@@ -54,7 +42,7 @@
 			scrollHeight="150" 
 			style="margin-top: 20px;"
 			selectionMode="single" 
-			selection="#{ufBean.selectedUf}" 
+			selection="#{ufBean.selected}" 
 			rowKey="#{uf.id}"
 			rendered="#{ufBean.mostraPesquisa}">
 			
@@ -63,7 +51,7 @@
 			<p:column headerText="Nome">
 				<h:outputText value="#{uf.nome}" />
 			</p:column>
-			
+
 			<p:column headerText="Sigla">
 				<h:outputText value="#{uf.sigla}" />
 			</p:column>

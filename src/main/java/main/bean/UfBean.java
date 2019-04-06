@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import main.dao.UfDao;
+import main.domain.Status;
 import main.domain.Uf;
 import main.tx.Transacional;
 
@@ -20,19 +21,12 @@ import main.tx.Transacional;
 public class UfBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private enum Status {pesquisando, incluindo, alterando};
     @Inject
     private UfDao ufDao;
     private Uf uf;
-    private Uf selectedUf;
-	private String nome;
+    private Uf selected;
     private List<Uf> ufs = new ArrayList<>();
-	private Status status = Status.pesquisando; 
-
-	
-	public String openUf() {
-		return "/view/uf-form.xhtml";
-	}
+	private Status status = Status.pesquisando;
 	
 	public void solicitaIncluir() {
 		this.uf = new Uf();
@@ -40,7 +34,7 @@ public class UfBean implements Serializable {
 	}
 	
 	public void solicitaAlterar() {
-		this.uf = selectedUf;
+		this.uf = selected;
 		status = Status.alterando;
 	}
 	
@@ -61,29 +55,23 @@ public class UfBean implements Serializable {
 		return (status == Status.pesquisando);
 	}
 	public boolean isDesabilitaAlteracao() {
-		return (selectedUf == null);
+		return (selected == null);
 	}
 	public boolean isDesabilitaExclusao() {
-		return (selectedUf == null);
+		return (selected == null);
 	}
 	
-	public Uf getSelectedUf() {
-		return selectedUf;
+	public Uf getSelected() {
+		return selected;
 	}
-	public void setSelectedUf(Uf selectedUsuario) {
-		if (selectedUf != null) {
-			System.out.println(selectedUf.getId());
+	public void setSelected(Uf selected) {
+		if (selected != null) {
+			System.out.println(selected.getId());
 		}
-		this.selectedUf = selectedUsuario;
+		this.selected = selected;
 	}
 	public List<Uf> getUfs() {
 		return ufs;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setLogin(String nome) {
-		this.nome = nome.trim().toLowerCase();
 	}
 	public Uf getUf() {
 		return this.uf;
@@ -98,23 +86,18 @@ public class UfBean implements Serializable {
 	@Transacional
 	public void confirmaAlteracao() {
 		this.ufDao.atualiza(uf);
-		this.selectedUf = null;
+		this.selected = null;
 		status = Status.pesquisando;
 	}
 	
 	@Transacional
 	public void solicitaExcluir() {
-		this.ufDao.remove(selectedUf);
-		this.selectedUf = null;
+		this.ufDao.remove(selected);
+		this.selected = null;
 	}
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("@PostConstruct GestorLoginBean.init();");
-	}
-	
-	public void pesquisar() {
-//		uf = ufDao.pesquisa();
-//		selectedU= null;
+		System.out.println("@PostConstruct UfBean.init();");
 	}
 }
