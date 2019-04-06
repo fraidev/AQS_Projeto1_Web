@@ -1,4 +1,4 @@
-package dao;
+package main.dao;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,16 +18,16 @@ public class DAO<T> implements Serializable {
 		this.em = em;
 	}
 	
-	public void adiciona(T usuario) {
-		em.persist(usuario);
+	public void adiciona(T obj) {
+		em.persist(obj);
 	}
 
-	public void remove(T usuario) {
-		em.remove(em.merge(usuario));
+	public void remove(T obj) {
+		em.remove(em.merge(obj));
 	}
 
-	public void atualiza(T usuario) {
-		em.merge(usuario);
+	public void atualiza(T obj) {
+		em.merge(obj);
 	}
 
 	public List<T> listaTodos() {

@@ -1,4 +1,4 @@
-package tx;
+package main.tx;
 
 import java.io.Serializable;
 
@@ -15,24 +15,24 @@ public class GerenciadorDeTransacao  implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private EntityManager manager;
-
+	EntityManager em;
+	
 	@AroundInvoke
 	public Object executaTX(InvocationContext contexto) throws Exception  {
 		Object resultado = null;
 		try {
-			manager.getTransaction().begin();
+			em.getTransaction().begin();
 			resultado = contexto.proceed();
-			manager.getTransaction().commit();
+			em.getTransaction().commit();
 			
 		} catch(Exception ex) {
-			manager.getTransaction().rollback();
+			em.getTransaction().rollback();
 			ex.printStackTrace();
 			throw new Exception(ex.getMessage());
 		} finally {
 			
-			if (manager.getTransaction().isActive()) {
-				manager.getTransaction().rollback();
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
 			}
 			
 		}

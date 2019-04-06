@@ -1,10 +1,9 @@
-package bean;
+package main.bean;
 
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 
@@ -16,6 +15,10 @@ public class HomeBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		System.out.println("HomeBean ");
+	}
+
+	public String back() {
+		return "home-form.xhtml";
 	}
 	
 	public String openUf() {

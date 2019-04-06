@@ -1,4 +1,4 @@
-package tx;
+package main.tx;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-package conexao;
+package main.conexao;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
@@ -11,7 +11,7 @@ public class JPAUtil {
 	
 	private static EntityManagerFactory emf = Persistence
 		.createEntityManagerFactory("postgres-local");
-
+    
 	@Produces
 	@RequestScoped
 	public EntityManager getEntityManager() {

@@ -11,93 +11,94 @@
 //import javax.persistence.NoResultException;
 //import javax.persistence.TypedQuery;
 //
-//import br.com.fsma.fiscalizacaoweb.modelo.negocio.Usuario;
+//import main.domain.Uf;
+//
 //
 //@Named
 //@RequestScoped
-//public class UsuarioDao implements Serializable {
+//public class UfDao implements Serializable {
 //
 //	private static final long serialVersionUID = 1L;
 //
-//	private DAO<Usuario> dao;
+//	private DAO<Uf> dao;
 //	
 //	@PostConstruct
 //	void init() {
-//		this.dao = new DAO<Usuario>(this.em, Usuario.class);
+//		this.dao = new DAO<Uf>(this.em, Uf.class);
 //	}
 //
 //	@Inject
 //	private EntityManager em;
 //	
-//	public boolean existe(Usuario usuario) {
+//	public boolean existe(Uf uf) {
 //		
-//		TypedQuery<Usuario> query = em.createQuery(
-//				  " select u from Usuario u "
-//				+ " where u.email = :pLogin and u.senha = :pSenha", Usuario.class);
+//		TypedQuery<Uf> query = em.createQuery(
+//				  " select u from Uf u "
+//				+ " where u.email = :pLogin and u.senha = :pSenha", Uf.class);
 //		
-//		query.setParameter("pLogin", usuario.getLogin());
-//		query.setParameter("pSenha", usuario.getSenha());
+//		query.setParameter("pLogin", uf.getLogin());
+//		query.setParameter("pSenha", uf.getSenha());
 //		try {
 //			@SuppressWarnings("unused")
-//			Usuario resultado = query.getSingleResult();
+//			Uf resultado = query.getSingleResult();
 //			return true;
 //		} catch (NoResultException ex) {
 //			return false;
 //		}
 //	}
 //	
-//	public Usuario buscaUsuarioPelaAutenticacao(Usuario usuario) {
-//		StringBuilder jpql = new StringBuilder();
-//		jpql.append(" select u from Usuario u ");
-//		jpql.append(" where ");
-//		jpql.append("       u.login = :pLogin ");
-//		jpql.append("   and u.senha = :pSenha ");
-//		
-//		TypedQuery<Usuario> query = em.createQuery(jpql.toString() , Usuario.class);
-//		
-//		query.setParameter("pLogin", usuario.getLogin());
-//		query.setParameter("pSenha", usuario.getSenha());
-//		try {
-//			return query.getSingleResult();
-//		} catch (NoResultException ex) {
-//			return null;
-//		}
+////	public Uf buscaUsuarioPelaAutenticacao(Uf uf) {
+////		StringBuilder jpql = new StringBuilder();
+////		jpql.append(" select u from Usuario u ");
+////		jpql.append(" where ");
+////		jpql.append("       u.login = :pLogin ");
+////		jpql.append("   and u.senha = :pSenha ");
+////		
+////		TypedQuery<Uf> query = em.createQuery(jpql.toString() , Uf.class);
+////		
+////		query.setParameter("pLogin", uf.getLogin());
+////		query.setParameter("pSenha", uf.getSenha());
+////		try {
+////			return query.getSingleResult();
+////		} catch (NoResultException ex) {
+////			return null;
+////		}
+////	}
+//
+//	public void adiciona(Uf uf) {
+//		dao.adiciona(uf);
 //	}
 //
-//	public void adiciona(Usuario usuario) {
-//		dao.adiciona(usuario);
+//	public void remove(Uf uf) {
+//		dao.remove(uf);
 //	}
 //
-//	public void remove(Usuario usuario) {
-//		dao.remove(usuario);
+//	public void atualiza(Uf uf) {
+//		dao.atualiza(uf);
 //	}
 //
-//	public void atualiza(Usuario usuario) {
-//		dao.atualiza(usuario);
-//	}
-//
-//	public Usuario buscaPorId(Long id) {
+//	public Uf buscaPorId(Long id) {
 //		return dao.buscaPorId(id);
 //	}
 //
-//	public List<Usuario> listaTodosPaginada(int firstResult, int maxResults) {
+//	public List<Uf> listaTodosPaginada(int firstResult, int maxResults) {
 //		return dao.listaTodosPaginada(firstResult, maxResults);
 //	}
 //
-//	public List<Usuario> pesquisa(String login) {
-//		StringBuilder jpql = new StringBuilder();
-//		jpql.append(" select u ");
-//		jpql.append(" 	 from Usuario u ");
-//		jpql.append(" where ");
-//		jpql.append(" 	 u.login like :login");
-//		jpql.append(" order by ");
-//		jpql.append(" 	 u.login");
-//		
-//		TypedQuery<Usuario> query = em.createQuery(jpql.toString(), Usuario.class);
-//		
-//		query.setParameter("login", login + "%" );
-//		
-//		return query.getResultList();
-//	}
+////	public List<Uf> pesquisa(String login) {
+////		StringBuilder jpql = new StringBuilder();
+////		jpql.append(" select u ");
+////		jpql.append(" 	 from Uf u ");
+////		jpql.append(" where ");
+////		jpql.append(" 	 u.login like :login");
+////		jpql.append(" order by ");
+////		jpql.append(" 	 u.login");
+////		
+////		TypedQuery<Uf> query = em.createQuery(jpql.toString(), Uf.class);
+////		
+////		query.setParameter("login", login + "%" );
+////		
+////		return query.getResultList();
+////	}
 //
 //}

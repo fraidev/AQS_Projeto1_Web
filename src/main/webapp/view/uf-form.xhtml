@@ -10,10 +10,107 @@
 </h:head>
 
 <h:body>
-      <h:form>
-			<p>Uf</p>
-			<p:commandButton value="Voltar" action="#{ufBean.voltar()}"/>
-      </h:form>
+	<h:form id="frmPesquisa" >
+		<p:panel style="width: 100%;" rendered="#{ufBean.mostraPesquisa}">
+			<p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
+			<p:inputText id="nome" value="#{ufBean.nome}" />
+
+			<p:commandButton value="Pesquisar"
+				style="float: right; position: relative;"   
+				actionListener="#{ufBean.pesquisar()}" 
+				process="@form" 
+				update="@form :frmDataGrid :frmAcoes"/>
+		</p:panel>
+	</h:form>
+	
+      <h:form id="frmAcoes" >
+		<p:panel rendered="#{ufBean.mostraPesquisa}">
+			<p:commandButton value="Novo"
+				actionListener="#{ufBean.solicitaIncluir()}"
+				style="margin-top: 20px;"
+				process="@form" 
+				update="@all"/>
+			
+			<p:commandButton value="Alterar"
+				actionListener="#{ufBean.solicitaAlterar()}"
+				style="margin-top: 20px;"
+				disabled="#{ufBean.desabilitaAlteracao}"
+				process="@form" 
+				update="@all"/>
+			
+			<p:commandButton value="Excluir"
+				style="margin-top: 20px;"
+				disabled="#{ufBean.desabilitaExclusao}"
+				process="@form" 
+				update="@form"/>
+		</p:panel>
+	</h:form>		
+		
+	<h:form id="frmDataGrid" >
+			
+		<p:dataTable var="uf" value="#{ufBean.ufs}" 
+			scrollable="true" 
+			scrollHeight="150" 
+			style="margin-top: 20px;"
+			selectionMode="single" 
+			selection="#{ufBean.selectedUf}" 
+			rowKey="#{uf.id}"
+			rendered="#{ufBean.mostraPesquisa}">
+			
+			<p:ajax event="rowSelect" update=":frmAcoes" />
+			
+			<p:column headerText="Nome">
+				<h:outputText value="#{uf.nome}" />
+			</p:column>
+			
+			<p:column headerText="Sigla">
+				<h:outputText value="#{uf.sigla}" />
+			</p:column>
+		
+		</p:dataTable>	
+		
+		<p:commandButton value="Sair"
+			rendered="#{ufBean.mostraPesquisa}"
+			style="float: right; position: relative; margin-top: 20px;"   
+			action="#{homeBean.back}" 
+			process="@form" 
+			update="@form"/>
+	</h:form>
+	
+
+	<h:form id="frmEdicao" >
+		<p:panelGrid columns="2" style="width: 100%;" rendered="#{ufBean.mostraEdicao}">
+			<p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
+			<p:inputText id="nome" value="#{ufBean.uf.nome}" />
+			
+			<p:outputLabel value="Sigla " for="sigla" style="width: 200px;" />
+			<p:password id="sigla" value="#{ufBean.uf.sigla}"  />
+			
+			<p:spacer />
+			<h:panelGroup>
+				<p:commandButton value="Confirmar"
+					rendered="#{ufBean.incluindo}"
+					id="btn-incluir"
+					style="margin-top: 20px;"   
+					actionListener="#{ufBean.confirmaInclusao()}"
+					process="@form" 
+					update="@form"/>
+				<p:commandButton value="ConfirmarE"
+					rendered="#{ufBean.alterando}"
+					id="btn-alterar"
+					style="margin-top: 20px;"  
+					actionListener="#{ufBean.confirmaAlteracao()}" 
+					process="@form" 
+					update="@form"/>
+				<p:commandButton value="Cancelar"
+					actionListener="#{ufBean.cancelar()}"
+					id="btn-cancelar"
+					style="margin-top: 20px;"   
+					process="@form" 
+					update="@all"/>
+			</h:panelGroup>
+		</p:panelGrid>
+	</h:form>	
 </h:body>
 
 </html>

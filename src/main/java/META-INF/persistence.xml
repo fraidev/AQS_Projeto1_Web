@@ -9,25 +9,17 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/fiscalizacao_db" />
-			<property name="javax.persistence.jdbc.user" value="admin" />
-			<property name="javax.persistence.jdbc.password" value="123456789" />
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres" /> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="123456789" /> <!-- DB Password -->
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.default_schema" value="public" />
 			<property name="hibernate.max_fetch_depth" value="3" />
-			
-			<property name="hibernate.c3p0.min_size" value="1" />
-			<property name="hibernate.c3p0.max_size" value="25" />
-			<property name="hibernate.c3p0.timeout" value="120" />
-			<property name="hibernate.c3p0.acquire_increment" value="2" />
-			<property name="hibernate.c3p0.max_statements"  value="30" />
-			<property name="hibernate.c3p0.idle_test_period"  value="150" />
-			<property name="hibernate.c3p0.preferredTestQuery"  value="select 1" />
 			
 		</properties>
 	</persistence-unit>

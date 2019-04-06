@@ -1,5 +1,5 @@
 <beans>
 	<interceptors>
-		<class>tx.GerenciadorDeTransacao</class>
+		<class>main.tx.GerenciadorDeTransacao</class>
 	</interceptors>
 </beans>
