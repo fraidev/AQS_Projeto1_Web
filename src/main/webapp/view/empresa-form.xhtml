@@ -1,19 +1,137 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Projeto Web - Uf</title>
+	<title>Projeto Web - Empresa</title>
 	<link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
 </h:head>
 
 <h:body>
-      <h:form>
-			<p>Empresa</p>
-			<p:commandButton value="Voltar" action="#{empresaBean.voltar()}"/>
-      </h:form>
+
+	<h:form id="frmAcoes" >
+		<p:panel rendered="#{empresaBean.mostraPesquisa}">
+			<p:commandButton value="Novo"
+							 actionListener="#{empresaBean.solicitaIncluir()}"
+							 style="margin-top: 20px;"
+							 process="@form"
+							 update="@all"/>
+
+			<p:commandButton value="Alterar"
+							 actionListener="#{empresaBean.solicitaAlterar()}"
+							 style="margin-top: 20px;"
+							 disabled="#{empresaBean.desabilitaAlteracao}"
+							 process="@form"
+							 update="@all"/>
+
+			<p:commandButton value="Excluir"
+							 actionListener="#{empresaBean.solicitaExcluir()}"
+							 style="margin-top: 20px;"
+							 disabled="#{empresaBean.desabilitaExclusao}"
+							 process="@form"
+							 update="@all"/>
+		</p:panel>
+	</h:form>
+
+	<h:form id="frmDataGrid" >
+
+		<p:dataTable var="empresa" value="#{empresaBean.empresas}"
+					 scrollable="true"
+					 scrollHeight="150"
+					 style="margin-top: 20px;"
+					 selectionMode="single"
+					 selection="#{empresaBean.selected}"
+					 rowKey="#{empresa.id}"
+					 rendered="#{empresaBean.mostraPesquisa}">
+
+			<p:ajax event="rowSelect" update=":frmAcoes" />
+
+			<p:column headerText="Empresa">
+				<h:outputText value="#{empresa.razaoSocial}" />
+			</p:column>
+
+			<p:column headerText="CNPJ">
+				<h:outputText value="#{empresa.cnpj}" />
+			</p:column>
+
+			<p:column headerText="Cep">
+				<h:outputText value="#{empresa.cep}" />
+			</p:column>
+
+			<p:column headerText="Empresa">
+				<h:outputText value="#{empresa.razaoSocial}" />
+			</p:column>
+
+			<p:column headerText="Bairro">
+				<h:outputText value="#{empresa.bairro.nome}" />
+			</p:column>
+
+			<p:column headerText="Cidade">
+				<h:outputText value="#{empresa.bairro.cidade.nome}" />
+			</p:column>
+
+			<p:column headerText="Uf">
+				<h:outputText value="#{empresa.bairro.cidade.uf.sigla}" />
+			</p:column>
+
+
+		</p:dataTable>
+
+		<p:commandButton value="Sair"
+						 rendered="#{empresaBean.mostraPesquisa}"
+						 style="float: right; position: relative; margin-top: 20px;"
+						 action="home"
+						 process="@form"
+						 update="@form"/>
+	</h:form>
+
+
+	<h:form id="frmEdicao" >
+		<p:panelGrid columns="2" style="width: 100%;" rendered="#{empresaBean.mostraEdicao}">
+			<p:outputLabel value="Razao Social: " for="RazaoSocial" style="width: 200px;" />
+			<p:inputText id="RazaoSocial" value="#{empresaBean.empresa.razaoSocial}" />
+
+			<p:outputLabel value="CNPJ: " for="CNPJ" style="width: 200px;" />
+			<p:inputText id="CNPJ" value="#{empresaBean.empresa.cnpj}" />
+
+			<p:outputLabel value="CEP: " for="CEP" style="width: 200px;" />
+			<p:inputText id="CEP" value="#{empresaBean.empresa.cep}" />
+
+			<p:outputLabel value="Logadouro: " for="Logadouro" style="width: 200px;" />
+			<p:inputText id="Logadouro" value="#{empresaBean.empresa.logadouro}" />
+
+			<p:outputLabel for="bairro" value="Bairro:" />
+			<p:selectOneMenu id="bairro" value="#{empresaBean.empresa.bairro}" style="width:125px">
+				<f:selectItems value="#{bairroBean.todos}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
+			</p:selectOneMenu>
+
+			<p:spacer />
+			<h:panelGroup>
+				<p:commandButton value="Confirmar"
+								 rendered="#{empresaBean.incluindo}"
+								 id="btn-incluir"
+								 style="margin-top: 20px;"
+								 actionListener="#{empresaBean.confirmaInclusao()}"
+								 process="@form"
+								 update="@all"/>
+				<p:commandButton value="Alterar"
+								 rendered="#{empresaBean.alterando}"
+								 id="btn-alterar"
+								 style="margin-top: 20px;"
+								 actionListener="#{empresaBean.confirmaAlteracao()}"
+								 process="@form"
+								 update="@all"/>
+				<p:commandButton value="Cancelar"
+								 actionListener="#{empresaBean.cancelar()}"
+								 id="btn-cancelar"
+								 style="margin-top: 20px;"
+								 process="@form"
+								 update="@all"/>
+			</h:panelGroup>
+		</p:panelGrid>
+	</h:form>
 </h:body>
 
 </html>

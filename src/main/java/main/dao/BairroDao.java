@@ -46,4 +46,8 @@ public class BairroDao implements Serializable {
 	public List<Bairro> listaTodosPaginada(int firstResult, int maxResults) {
 		return dao.listaTodosPaginada(firstResult, maxResults);
 	}
+
+	public List<Bairro> listaTodos() {
+		return dao.listaTodos();
+	}
 }

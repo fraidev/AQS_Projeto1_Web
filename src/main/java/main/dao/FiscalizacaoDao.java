@@ -46,4 +46,8 @@ public class FiscalizacaoDao implements Serializable {
     public List<Fiscalizacao> listaTodosPaginada(int firstResult, int maxResults) {
         return dao.listaTodosPaginada(firstResult, maxResults);
     }
+
+    public List<Fiscalizacao> listaTodos() {
+        return dao.listaTodos();
+    }
 }

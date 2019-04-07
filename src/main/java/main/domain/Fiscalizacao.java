@@ -40,26 +40,26 @@ public class Fiscalizacao implements Serializable {
     @JoinColumn(name="EmpresaId")
 	private Empresa empresa;
 	
-	public Uf getUf() {
-		return uf;
-	}
-	public Bairro getBairro() {
-		return bairro;
-	}
-	public Cidade getCidade() {
-		return cidade;
-	}
+//	public Uf getUf() {
+//		return uf;
+//	}
+//	public Bairro getBairro() {
+//		return bairro;
+//	}
+//	public Cidade getCidade() {
+//		return cidade;
+//	}
 	public Empresa getEmpresa() {
 		return empresa;
 	}
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
-		this.razaoSocial = empresa.getRazaoSocial();
-		this.logadouro = empresa.getLogadouro();
-		this.cep = empresa.getCep();
-		this.bairro = empresa.getBairro();
-		this.cidade = empresa.getCidade();
-		this.uf = empresa.getUf();
+//		this.razaoSocial = empresa.getRazaoSocial();
+//		this.logadouro = empresa.getLogadouro();
+//		this.cep = empresa.getCep();
+//		this.bairro = empresa.getBairro();
+//		this.cidade = empresa.getCidade();
+//		this.uf = empresa.getUf();
 	}
 	
 	public Long getId() {
@@ -74,18 +74,18 @@ public class Fiscalizacao implements Serializable {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-	public String getLogadouro() {
-		return logadouro;
-	}
-	public void setLogadouro(String logadouro) {
-		this.logadouro = logadouro;
-	}
-	public String getCep() {
-		return cep;
-	}
+//	public String getRazaoSocial() {
+//		return razaoSocial;
+//	}
+//	public String getLogadouro() {
+//		return logadouro;
+//	}
+//	public void setLogadouro(String logadouro) {
+//		this.logadouro = logadouro;
+//	}
+//	public String getCep() {
+//		return cep;
+//	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -8,7 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import main.domain.Cidade;
+import main.domain.Empresa;
 
 
 @Named
@@ -17,33 +17,37 @@ public class EmpresaDao implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private DAO<Cidade> dao;
+    private DAO<Empresa> dao;
 
     @Inject
     EntityManager em;
 
     @PostConstruct
     void init() {
-        this.dao = new DAO<Cidade>(this.em, Cidade.class);
+        this.dao = new DAO<Empresa>(this.em, Empresa.class);
     }
 
-    public void adiciona(Cidade cidade) {
-        dao.adiciona(cidade);
+    public void adiciona(Empresa empresa) {
+        dao.adiciona(empresa);
     }
 
-    public void remove(Cidade cidade) {
-        dao.remove(cidade);
+    public void remove(Empresa empresa) {
+        dao.remove(empresa);
     }
 
-    public void atualiza(Cidade cidade) {
-        dao.atualiza(cidade);
+    public void atualiza(Empresa empresa) {
+        dao.atualiza(empresa);
     }
 
-    public Cidade buscaPorId(Long id) {
+    public Empresa buscaPorId(Long id) {
         return dao.buscaPorId(id);
     }
 
-    public List<Cidade> listaTodosPaginada(int firstResult, int maxResults) {
+    public List<Empresa> listaTodosPaginada(int firstResult, int maxResults) {
         return dao.listaTodosPaginada(firstResult, maxResults);
+    }
+
+    public List<Empresa> listaTodos() {
+        return dao.listaTodos();
     }
 }

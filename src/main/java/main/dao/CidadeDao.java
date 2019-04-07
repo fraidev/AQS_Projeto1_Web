@@ -47,4 +47,8 @@ public class CidadeDao implements Serializable {
     public List<Cidade> listaTodosPaginada(int firstResult, int maxResults) {
         return dao.listaTodosPaginada(firstResult, maxResults);
     }
+
+    public List<Cidade> listaTodos() {
+        return dao.listaTodos();
+    }
 }

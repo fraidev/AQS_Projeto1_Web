@@ -30,14 +30,14 @@ public class Empresa implements Serializable {
 	@Column(name = "cep")
 	private String cep;
 	@ManyToOne
-    @JoinColumn(name="ufId")
-	private Uf uf;
-	@ManyToOne
     @JoinColumn(name="bairroId")
 	private Bairro bairro;
 	@ManyToOne
-    @JoinColumn(name="cidadeId")
+	@JoinColumn(name="cidadeId")
 	private Cidade cidade;
+	@ManyToOne
+	@JoinColumn(name="ufId")
+	private Uf uf;
 	@OneToMany(mappedBy="empresa", cascade = CascadeType.ALL)
 	private List<Fiscalizacao> fiscalizacoes;
 	

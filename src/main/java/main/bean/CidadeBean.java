@@ -3,6 +3,7 @@ package main.bean;
 import main.dao.CidadeDao;
 import main.domain.Cidade;
 import main.domain.Status;
+import main.domain.Uf;
 import main.tx.Transacional;
 
 import java.io.Serializable;
@@ -74,6 +75,10 @@ public class CidadeBean implements Serializable {
 
 	public Cidade getCidade() {
 		return this.cidade;
+	}
+
+	public List<Cidade> getTodos(){
+		return this.cidadeDao.listaTodos();
 	}
 
 	@Transacional
