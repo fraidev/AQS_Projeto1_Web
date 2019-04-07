@@ -52,6 +52,10 @@
 				<h:outputText value="#{cidade.nome}" />
 			</p:column>
 
+			<p:column headerText="UF">
+				<h:outputText value="#{cidade.uf.sigla}" />
+			</p:column>
+
 		</p:dataTable>
 
 		<p:commandButton value="Sair"
@@ -67,6 +71,11 @@
 		<p:panelGrid columns="2" style="width: 100%;" rendered="#{cidadeBean.mostraEdicao}">
 			<p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
 			<p:inputText id="nome" value="#{cidadeBean.cidade.nome}" />
+
+			<p:outputLabel for="uf" value="UF:" />
+			<p:selectOneMenu id="uf" value="#{cidadeBean.cidade.uf}" style="width:125px">
+				<f:selectItems value="#{ufBean.todos}" var="uf" itemLabel="#{uf.sigla}" itemValue="#{uf}" />
+			</p:selectOneMenu>
 
 			<p:spacer />
 			<h:panelGroup>

@@ -51,7 +51,7 @@ public class UfBean implements Serializable {
 		return (status == Status.alterando);
 	}
 	public boolean isMostraPesquisa() {
-		this.ufs = ufDao.listaTodosPaginada(0, 10);
+		this.ufs = getTodos();
 		return (status == Status.pesquisando);
 	}
 	public boolean isDesabilitaAlteracao() {
@@ -75,6 +75,10 @@ public class UfBean implements Serializable {
 	}
 	public Uf getUf() {
 		return this.uf;
+	}
+	
+	public List<Uf> getTodos(){
+		return this.ufDao.listaTodos();
 	}
 
 	@Transacional

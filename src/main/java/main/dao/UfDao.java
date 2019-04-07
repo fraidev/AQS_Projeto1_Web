@@ -8,10 +8,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-
-import main.conexao.JPAUtil;
 import main.dao.DAO;
 import main.domain.Uf;
 
@@ -50,5 +46,9 @@ public class UfDao implements Serializable {
 
 	public List<Uf> listaTodosPaginada(int firstResult, int maxResults) {
 		return dao.listaTodosPaginada(firstResult, maxResults);
+	}
+
+	public List<Uf> listaTodos() {
+		return dao.listaTodos();
 	}
 }

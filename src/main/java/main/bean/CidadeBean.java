@@ -77,7 +77,7 @@ public class CidadeBean implements Serializable {
 	}
 
 	@Transacional
-	public void confirmaInclusao() {
+	public void confirmaInclusao(){
 		this.cidadeDao.adiciona(cidade);
 		status = Status.pesquisando;
 	}
