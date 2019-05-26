@@ -13,8 +13,8 @@ public class Ocorrencia implements Serializable {
     private Long id;
     @Column(name = "nome")
     private String nome;
-    @Column(name = "motivo")
-    private String motivo;
+    @Column(name = "codigo")
+    private String codigo;
     @ManyToOne
     @JoinColumn(name="fiscalizacaoId")
     private Fiscalizacao fiscalizacao;
@@ -31,11 +31,17 @@ public class Ocorrencia implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public String getMotivo() {
-        return motivo;
+    public Fiscalizacao getFiscalizacao() {
+        return fiscalizacao;
     }
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
+    public void setFiscalizacao(Fiscalizacao fiscalizacao) {
+        this.fiscalizacao = fiscalizacao;
+    }
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     @Override
@@ -60,13 +66,5 @@ public class Ocorrencia implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
-    }
-
-    public Fiscalizacao getFiscalizacao() {
-        return fiscalizacao;
-    }
-
-    public void setFiscalizacao(Fiscalizacao fiscalizacao) {
-        this.fiscalizacao = fiscalizacao;
     }
 }

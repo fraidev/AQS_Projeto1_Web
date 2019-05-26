@@ -67,6 +67,14 @@
                 <h:outputText value="#{fiscal.nome}" />
             </p:column>
 
+            <p:column headerText="Cpf">
+                <h:outputText value="#{fiscal.cpf}" />
+            </p:column>
+
+            <p:column headerText="dataDeNascimento">
+                <h:outputText value="#{fiscal.dataDeNascimento}" />
+            </p:column>
+
         </p:dataTable>
 
         <p:commandButton value="Sair"
@@ -82,6 +90,12 @@
         <p:panelGrid columns="2" style="width: 100%;" rendered="#{fiscalBean.mostraEdicao}">
             <p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
             <p:inputText id="nome" value="#{fiscalBean.fiscal.nome}" />
+
+            <p:outputLabel value="Cpf: " for="cpf" style="width: 200px;" />
+            <p:inputText id="cpf" value="#{fiscalBean.fiscal.cpf}" />
+
+            <p:outputLabel for="dataDeNascimento" value="Data De Nascimento:" style="width: 200px;"/>
+            <p:calendar id="dataDeNascimento" pattern="dd/MM/yyyy" mask="true" converter="localDateConverter" value="#{fiscalBean.fiscal.dataDeNascimento}" />
 
             <p:spacer />
             <h:panelGroup>

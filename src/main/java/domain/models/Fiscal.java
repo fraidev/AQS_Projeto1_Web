@@ -2,6 +2,7 @@ package domain.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="tb_fiscalizacao")
@@ -14,6 +15,10 @@ public class Fiscal implements Serializable {
     private Long id;
     @Column(name = "nome")
     private String nome;
+    @Column(name = "dataDeNascimento")
+    private LocalDate dataDeNascimento;
+    @Column(name = "cpf")
+    private String cpf;
 
     public Long getId() {
         return id;
@@ -30,6 +35,23 @@ public class Fiscal implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public LocalDate getDataDeNascimento() {
+        return dataDeNascimento;
+    }
+
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
+        this.dataDeNascimento = dataDeNascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
