@@ -98,6 +98,7 @@ public class CidadeBean implements Serializable {
 	public void confirmaInclusao(){
 		this.cidadeRepository.adiciona(cidade);
 		status = Status.pesquisando;
+		this.cidades = cidadeRepository.listaTodos();
 	}
 	
 	@Transacional
@@ -105,12 +106,14 @@ public class CidadeBean implements Serializable {
 		this.cidadeRepository.atualiza(cidade);
 		this.selected = null;
 		status = Status.pesquisando;
+		this.cidades = cidadeRepository.listaTodos();
 	}
 	
 	@Transacional
 	public void solicitaExcluir() {
 		this.cidadeRepository.remove(selected);
 		this.selected = null;
+		this.cidades = cidadeRepository.listaTodos();
 	}
 	
 	@PostConstruct

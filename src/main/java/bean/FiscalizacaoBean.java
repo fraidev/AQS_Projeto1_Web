@@ -95,6 +95,7 @@ public class FiscalizacaoBean implements Serializable {
 	public void confirmaInclusao(){
 		this.fiscalizacaoRepository.adiciona(fiscalizacao);
 		status = Status.pesquisando;
+		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 	}
 
 	@Transacional
@@ -102,12 +103,14 @@ public class FiscalizacaoBean implements Serializable {
 		this.fiscalizacaoRepository.atualiza(fiscalizacao);
 		this.selected = null;
 		status = Status.pesquisando;
+		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 	}
 
 	@Transacional
 	public void solicitaExcluir() {
 		this.fiscalizacaoRepository.remove(selected);
 		this.selected = null;
+		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 	}
 
 	@PostConstruct

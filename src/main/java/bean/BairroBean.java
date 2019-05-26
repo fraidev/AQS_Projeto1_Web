@@ -96,6 +96,7 @@ public class BairroBean implements Serializable {
 	public void confirmaInclusao(){
 		this.bairroRepository.adiciona(bairro);
 		status = Status.pesquisando;
+		this.bairros = bairroRepository.listaTodos();
 	}
 
 	@Transacional
@@ -103,12 +104,14 @@ public class BairroBean implements Serializable {
 		this.bairroRepository.atualiza(bairro);
 		this.selected = null;
 		status = Status.pesquisando;
+		this.bairros = bairroRepository.listaTodos();
 	}
 
 	@Transacional
 	public void solicitaExcluir() {
 		this.bairroRepository.remove(selected);
 		this.selected = null;
+		this.bairros = bairroRepository.listaTodos();
 	}
 
 	@PostConstruct

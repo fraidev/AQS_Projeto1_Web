@@ -98,6 +98,7 @@ public class EmpresaBean implements Serializable {
 	public void confirmaInclusao(){
 		this.empresaRepository.adiciona(empresa);
 		status = Status.pesquisando;
+		this.empresas = empresaRepository.listaTodosPaginada(0, 100);
 	}
 
 	@Transacional
@@ -105,12 +106,14 @@ public class EmpresaBean implements Serializable {
 		this.empresaRepository.atualiza(empresa);
 		this.selected = null;
 		status = Status.pesquisando;
+		this.empresas = empresaRepository.listaTodosPaginada(0, 100);
 	}
 
 	@Transacional
 	public void solicitaExcluir() {
 		this.empresaRepository.remove(selected);
 		this.selected = null;
+		this.empresas = empresaRepository.listaTodosPaginada(0, 100);
 	}
 
 	@PostConstruct

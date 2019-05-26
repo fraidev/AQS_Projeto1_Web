@@ -105,6 +105,7 @@ public class UfBean implements Serializable {
 	public void confirmaInclusao() {
 		this.ufRepository.adiciona(uf);
 		status = Status.pesquisando;
+		this.ufs = getTodos();
 	}
 	
 	@Transacional
@@ -112,12 +113,14 @@ public class UfBean implements Serializable {
 		this.ufRepository.atualiza(uf);
 		this.selected = null;
 		status = Status.pesquisando;
+		this.ufs = getTodos();
 	}
 	
 	@Transacional
 	public void solicitaExcluir() {
 		this.ufRepository.remove(selected);
 		this.selected = null;
+		this.ufs = getTodos();
 	}
 	
 	@PostConstruct
