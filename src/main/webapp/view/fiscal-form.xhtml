@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Projeto Web - Fiscal</title>
+    <link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
+</h:head>
+
+<h:body>
+
+    <h:form id="frmPesquisa" >
+        <p:panel style="width: 100%;" rendered="#{fiscalBean.mostraPesquisa}">
+            <p:outputLabel value="Nome: " for="nomePesquisa" style="width: 200px;" />
+            <p:inputText id="nomePesquisa" value="#{fiscalBean.nome}" />
+
+            <p:commandButton value="Pesquisar"
+                             style="float: right; position: relative;"
+                             actionListener="#{fiscalBean.pesquisar()}"
+                             process="@form"
+                             update=":frmDataGrid"/>
+        </p:panel>
+    </h:form>
+
+    <br/>
+
+    <h:form id="frmAcoes" >
+        <p:panel rendered="#{fiscalBean.mostraPesquisa}">
+            <p:commandButton value="Novo"
+                             actionListener="#{fiscalBean.solicitaIncluir()}"
+                             style="margin-top: 20px;"
+                             process="@form"
+                             update="@all"/>
+
+            <p:commandButton value="Alterar"
+                             actionListener="#{fiscalBean.solicitaAlterar()}"
+                             style="margin-top: 20px;"
+                             disabled="#{fiscalBean.desabilitaAlteracao}"
+                             process="@form"
+                             update="@all"/>
+
+            <p:commandButton value="Excluir"
+                             actionListener="#{fiscalBean.solicitaExcluir()}"
+                             style="margin-top: 20px;"
+                             disabled="#{fiscalBean.desabilitaExclusao}"
+                             process="@form"
+                             update="@all"/>
+        </p:panel>
+    </h:form>
+
+    <h:form id="frmDataGrid" >
+
+        <p:dataTable var="fiscal" value="#{fiscalBean.fiscais}"
+                     scrollable="true"
+                     scrollHeight="300"
+                     style="margin-top: 20px;"
+                     selectionMode="single"
+                     selection="#{fiscalBean.selected}"
+                     rowKey="#{fiscal.id}"
+                     rendered="#{fiscalBean.mostraPesquisa}">
+
+            <p:ajax event="rowSelect" update=":frmAcoes" />
+
+            <p:column headerText="fiscal">
+                <h:outputText value="#{fiscal.nome}" />
+            </p:column>
+
+        </p:dataTable>
+
+        <p:commandButton value="Sair"
+                         rendered="#{fiscalBean.mostraPesquisa}"
+                         style="float: right; position: relative; margin-top: 20px;"
+                         action="home"
+                         process="@form"
+                         update="@form"/>
+    </h:form>
+
+
+    <h:form id="frmEdicao" >
+        <p:panelGrid columns="2" style="width: 100%;" rendered="#{fiscalBean.mostraEdicao}">
+            <p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
+            <p:inputText id="nome" value="#{fiscalBean.fiscal.nome}" />
+
+            <p:spacer />
+            <h:panelGroup>
+                <p:commandButton value="Confirmar"
+                                 rendered="#{fiscalBean.incluindo}"
+                                 id="btn-incluir"
+                                 style="margin-top: 20px;"
+                                 actionListener="#{fiscalBean.confirmaInclusao()}"
+                                 process="@form"
+                                 update="@all"/>
+                <p:commandButton value="Alterar"
+                                 rendered="#{fiscalBean.alterando}"
+                                 id="btn-alterar"
+                                 style="margin-top: 20px;"
+                                 actionListener="#{fiscalBean.confirmaAlteracao()}"
+                                 process="@form"
+                                 update="@all"/>
+                <p:commandButton value="Cancelar"
+                                 actionListener="#{fiscalBean.cancelar()}"
+                                 id="btn-cancelar"
+                                 style="margin-top: 20px;"
+                                 process="@form"
+                                 update="@all"/>
+            </h:panelGroup>
+        </p:panelGrid>
+    </h:form>
+</h:body>
+
+</html>

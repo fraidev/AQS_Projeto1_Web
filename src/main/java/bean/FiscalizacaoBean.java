@@ -1,5 +1,7 @@
 package bean;
 
+import domain.models.Fiscal;
+import domain.repositories.FiscalRepository;
 import domain.repositories.FiscalizacaoRepository;
 import domain.models.Fiscalizacao;
 import domain.models.Status;
@@ -19,6 +21,8 @@ public class FiscalizacaoBean implements Serializable {
 
 	@Inject
 	private FiscalizacaoRepository fiscalizacaoRepository;
+	@Inject
+	private FiscalRepository fiscalRepository;
 	private Fiscalizacao fiscalizacao;
 	private Fiscalizacao selected;
 	private List<Fiscalizacao> fiscalizacaos = new ArrayList<>();
@@ -89,6 +93,10 @@ public class FiscalizacaoBean implements Serializable {
 
 	public List<Fiscalizacao> getTodos(){
 		return this.fiscalizacaoRepository.listaTodos();
+	}
+
+	public List<Fiscal> getTodosFiscais(){
+		return this.fiscalRepository.listaTodos();
 	}
 
 	@Transacional

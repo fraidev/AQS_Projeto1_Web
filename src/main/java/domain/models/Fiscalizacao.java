@@ -2,14 +2,8 @@ package domain.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name="tb_fiscalizacao")
@@ -27,6 +21,14 @@ public class Fiscalizacao implements Serializable {
 	private String logadouro;
 	@Column(name = "cep")
 	private String cep;
+	@ManyToOne
+	@JoinColumn(name="fiscal1Id")
+	private Fiscal fiscal1;
+	@ManyToOne
+	@JoinColumn(name="fiscal2Id")
+	private Fiscal fiscal2;
+	@OneToMany(mappedBy="fiscalizacao")
+	private List<Ocorrencia> ocorrencias;
 	@ManyToOne
     @JoinColumn(name="ufId")
 	private Uf uf;
@@ -136,5 +138,29 @@ public class Fiscalizacao implements Serializable {
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+
+	public Fiscal getFiscal1() {
+		return fiscal1;
+	}
+
+	public void setFiscal1(Fiscal fiscal1) {
+		this.fiscal1 = fiscal1;
+	}
+
+	public Fiscal getFiscal2() {
+		return fiscal2;
+	}
+
+	public void setFiscal2(Fiscal fiscal2) {
+		this.fiscal2 = fiscal2;
+	}
+
+	public List<Ocorrencia> getOcorrencias() {
+		return ocorrencias;
+	}
+
+	public void setOcorrencias(List<Ocorrencia> ocorrencias) {
+		this.ocorrencias = ocorrencias;
 	}
 }

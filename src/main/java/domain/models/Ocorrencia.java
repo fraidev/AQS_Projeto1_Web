@@ -4,32 +4,40 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="tb_fiscalizacao")
-public class Fiscal implements Serializable {
+@Table(name="tb_ocorrencia")
+public class Ocorrencia implements Serializable {
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "nome")
     private String nome;
+    @Column(name = "motivo")
+    private String motivo;
+    @ManyToOne
+    @JoinColumn(name="fiscalizacaoId")
+    private Fiscalizacao fiscalizacao;
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
+    public String getMotivo() {
+        return motivo;
+    }
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -45,12 +53,20 @@ public class Fiscal implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Fiscal other = (Fiscal) obj;
+        Ocorrencia other = (Ocorrencia) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public Fiscalizacao getFiscalizacao() {
+        return fiscalizacao;
+    }
+
+    public void setFiscalizacao(Fiscalizacao fiscalizacao) {
+        this.fiscalizacao = fiscalizacao;
     }
 }

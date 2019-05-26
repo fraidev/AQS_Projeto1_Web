@@ -113,6 +113,19 @@
 				<f:selectItems value="#{empresaBean.todos}" var="empresa" itemLabel="#{empresa.razaoSocial}" itemValue="#{empresa}" />
 			</p:selectOneMenu>
 
+
+			<p:outputLabel for="Fiscal1" value="Fiscal 1:" />
+			<p:selectOneMenu id="Fiscal1" value="#{fiscalizacaoBean.fiscalizacao.fiscal1}" style="width:125px">
+				<f:selectItems value="#{fiscalizacaoBean.getTodosFiscais}" var="fiscal1" itemLabel="#{fiscal1.razaoSocial}" itemValue="#{fiscal1}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="Fiscal2" value="Fiscal 2:" />
+			<p:selectOneMenu id="Fiscal2" value="#{fiscalizacaoBean.fiscalizacao.fiscal2}" style="width:125px">
+				<f:selectItems value="#{fiscalizacaoBean.getTodosFiscais}" var="fiscal2" itemLabel="#{fiscal2.razaoSocial}" itemValue="#{fiscal2}" />
+			</p:selectOneMenu>
+
+
+
 			<p:spacer />
 			<h:panelGroup>
 				<p:commandButton value="Confirmar"
