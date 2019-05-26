@@ -3,6 +3,7 @@ package bean;
 import domain.repositories.EmpresaRepository;
 import domain.models.Empresa;
 import domain.models.Status;
+import domain.services.CpfCnpjUtils;
 import infrastructure.tx.Transacional;
 
 import java.io.Serializable;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,6 +29,7 @@ public class EmpresaBean implements Serializable {
 	private List<Empresa> empresas = new ArrayList<>();
 	private Status status = Status.pesquisando;
 	private String nome;
+	private String warning;
 
 	public String getNome() {
 		return nome;
@@ -96,6 +100,11 @@ public class EmpresaBean implements Serializable {
 
 	@Transacional
 	public void confirmaInclusao(){
+		if(!CpfCnpjUtils.isValidCNPJ(empresa.getCnpj())){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "CNPJ Invalidado."));
+			return;
+		}
+
 		this.empresaRepository.adiciona(empresa);
 		status = Status.pesquisando;
 		this.empresas = empresaRepository.listaTodosPaginada(0, 100);
@@ -103,6 +112,11 @@ public class EmpresaBean implements Serializable {
 
 	@Transacional
 	public void confirmaAlteracao() {
+		if(!CpfCnpjUtils.isValidCNPJ(empresa.getCnpj())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "CNPJ Invalidado."));
+			return;
+		}
+
 		this.empresaRepository.atualiza(empresa);
 		this.selected = null;
 		status = Status.pesquisando;
@@ -120,5 +134,13 @@ public class EmpresaBean implements Serializable {
 	public void init() {
 		this.empresas = empresaRepository.listaTodosPaginada(0, 100);
 		System.out.println("@PostConstruct EmpresaBean.init();");
+	}
+
+	public String getWarning() {
+		return warning;
+	}
+
+	public void setWarning(String warning) {
+		this.warning = warning;
 	}
 }
