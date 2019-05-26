@@ -17,6 +17,8 @@ public class Fiscal implements Serializable {
     private String nome;
     @Column(name = "dataDeNascimento")
     private LocalDate dataDeNascimento;
+    @Column(name = "dataDeContratacao")
+    private LocalDate dataDeContratacao;
     @Column(name = "cpf")
     private String cpf;
 
@@ -74,5 +76,13 @@ public class Fiscal implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public LocalDate getDataDeContratacao() {
+        return dataDeContratacao;
+    }
+
+    public void setDataDeContratacao(LocalDate dataDeContratacao) {
+        this.dataDeContratacao = dataDeContratacao;
     }
 }

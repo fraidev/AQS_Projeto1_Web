@@ -75,6 +75,10 @@
                 <h:outputText value="#{fiscal.dataDeNascimento}" />
             </p:column>
 
+            <p:column headerText="dataDeContratacao">
+                <h:outputText value="#{fiscal.dataDeContratacao}" />
+            </p:column>
+
         </p:dataTable>
 
         <p:commandButton value="Sair"
@@ -96,6 +100,9 @@
 
             <p:outputLabel for="dataDeNascimento" value="Data De Nascimento:" style="width: 200px;"/>
             <p:calendar id="dataDeNascimento" pattern="dd/MM/yyyy" mask="true" converter="localDateConverter" value="#{fiscalBean.fiscal.dataDeNascimento}" />
+
+            <p:outputLabel for="dataDeContratacao" value="Data De Contratacao:" style="width: 200px;"/>
+            <p:calendar id="dataDeContratacao" pattern="dd/MM/yyyy" mask="true" converter="localDateConverter" value="#{fiscalBean.fiscal.dataDeContratacao}" />
 
             <p:spacer />
             <h:panelGroup>
