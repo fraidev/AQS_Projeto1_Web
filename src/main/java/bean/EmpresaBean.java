@@ -1,6 +1,6 @@
 package bean;
 
-import domain.repository.EmpresaDao;
+import domain.repositories.EmpresaRepository;
 import domain.models.Empresa;
 import domain.models.Status;
 import infrastructure.tx.Transacional;
@@ -20,11 +20,21 @@ public class EmpresaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private EmpresaDao empresaDao;
+	private EmpresaRepository empresaRepository;
 	private Empresa empresa;
 	private Empresa selected;
 	private List<Empresa> empresas = new ArrayList<>();
 	private Status status = Status.pesquisando;
+	private String nome;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 
 	public void solicitaIncluir() {
 		this.empresa = new Empresa();
@@ -34,6 +44,11 @@ public class EmpresaBean implements Serializable {
 	public void solicitaAlterar() {
 		this.empresa = selected;
 		status = Status.alterando;
+	}
+
+	public void pesquisar() {
+		this.empresas = empresaRepository.pesquisar(this.nome);
+		this.selected = null;
 	}
 
 	public void cancelar() {
@@ -49,7 +64,6 @@ public class EmpresaBean implements Serializable {
 		return (status == Status.alterando);
 	}
 	public boolean isMostraPesquisa() {
-		this.empresas = empresaDao.listaTodosPaginada(0, 10);
 		return (status == Status.pesquisando);
 	}
 	public boolean isDesabilitaAlteracao() {
@@ -77,30 +91,31 @@ public class EmpresaBean implements Serializable {
 	}
 
 	public List<Empresa> getTodos(){
-		return this.empresaDao.listaTodos();
+		return this.empresaRepository.listaTodos();
 	}
 
 	@Transacional
 	public void confirmaInclusao(){
-		this.empresaDao.adiciona(empresa);
+		this.empresaRepository.adiciona(empresa);
 		status = Status.pesquisando;
 	}
 
 	@Transacional
 	public void confirmaAlteracao() {
-		this.empresaDao.atualiza(empresa);
+		this.empresaRepository.atualiza(empresa);
 		this.selected = null;
 		status = Status.pesquisando;
 	}
 
 	@Transacional
 	public void solicitaExcluir() {
-		this.empresaDao.remove(selected);
+		this.empresaRepository.remove(selected);
 		this.selected = null;
 	}
 
 	@PostConstruct
 	public void init() {
+		this.empresas = empresaRepository.listaTodosPaginada(0, 100);
 		System.out.println("@PostConstruct EmpresaBean.init();");
 	}
 }

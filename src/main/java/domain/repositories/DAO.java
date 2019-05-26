@@ -1,4 +1,4 @@
-package domain.repository;
+package domain.repositories;
 
 import java.io.Serializable;
 import java.util.List;

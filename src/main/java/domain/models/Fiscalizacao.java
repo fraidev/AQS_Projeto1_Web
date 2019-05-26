@@ -39,16 +39,7 @@ public class Fiscalizacao implements Serializable {
 	@ManyToOne
     @JoinColumn(name="EmpresaId")
 	private Empresa empresa;
-	
-//	public Uf getUf() {
-//		return uf;
-//	}
-//	public Bairro getBairro() {
-//		return bairro;
-//	}
-//	public Cidade getCidade() {
-//		return cidade;
-//	}
+
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -74,18 +65,7 @@ public class Fiscalizacao implements Serializable {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-//	public String getRazaoSocial() {
-//		return razaoSocial;
-//	}
-//	public String getLogadouro() {
-//		return logadouro;
-//	}
-//	public void setLogadouro(String logadouro) {
-//		this.logadouro = logadouro;
-//	}
-//	public String getCep() {
-//		return cep;
-//	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -108,5 +88,53 @@ public class Fiscalizacao implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+
+	public String getLogadouro() {
+		return logadouro;
+	}
+
+	public void setLogadouro(String logadouro) {
+		this.logadouro = logadouro;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public Uf getUf() {
+		return uf;
+	}
+
+	public void setUf(Uf uf) {
+		this.uf = uf;
+	}
+
+	public Bairro getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(Bairro bairro) {
+		this.bairro = bairro;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 }

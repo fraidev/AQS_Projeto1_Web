@@ -9,7 +9,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import domain.repository.UfRepository;
+import domain.repositories.UfRepository;
 import domain.models.Status;
 import domain.models.Uf;
 import infrastructure.tx.Transacional;
@@ -28,7 +28,6 @@ public class UfBean implements Serializable {
     private List<Uf> ufs = new ArrayList<>();
 	private Status status = Status.pesquisando;
 	private String nome;
-
 
 	public String getNome() {
 		return nome;
@@ -53,7 +52,6 @@ public class UfBean implements Serializable {
 	}
 
 	public void pesquisar() {
-		this.ufs = getTodos();
 		this.setUfs(ufRepository.pesquisar(this.nome));
 		this.selected = null;
 	}

@@ -11,6 +11,21 @@
 
 <h:body>
 
+	<h:form id="frmPesquisa" >
+		<p:panel style="width: 100%;" rendered="#{fiscalizacaoBean.mostraPesquisa}">
+			<p:outputLabel value="Nome: " for="nomePesquisa" style="width: 200px;" />
+			<p:inputText id="nomePesquisa" value="#{fiscalizacaoBean.nome}" />
+
+			<p:commandButton value="Pesquisar"
+							 style="float: right; position: relative;"
+							 actionListener="#{fiscalizacaoBean.pesquisar()}"
+							 process="@form"
+							 update=":frmDataGrid"/>
+		</p:panel>
+	</h:form>
+
+	<br/>
+
 	<h:form id="frmAcoes" >
 		<p:panel rendered="#{fiscalizacaoBean.mostraPesquisa}">
 			<p:commandButton value="Novo"

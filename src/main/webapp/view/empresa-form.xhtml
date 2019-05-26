@@ -11,6 +11,21 @@
 
 <h:body>
 
+	<h:form id="frmPesquisa" >
+		<p:panel style="width: 100%;" rendered="#{empresaBean.mostraPesquisa}">
+			<p:outputLabel value="Nome: " for="nomePesquisa" style="width: 200px;" />
+			<p:inputText id="nomePesquisa" value="#{empresaBean.nome}" />
+
+			<p:commandButton value="Pesquisar"
+							 style="float: right; position: relative;"
+							 actionListener="#{empresaBean.pesquisar()}"
+							 process="@form"
+							 update=":frmDataGrid"/>
+		</p:panel>
+	</h:form>
+
+	<br/>
+
 	<h:form id="frmAcoes" >
 		<p:panel rendered="#{empresaBean.mostraPesquisa}">
 			<p:commandButton value="Novo"
@@ -48,7 +63,7 @@
 
 			<p:ajax event="rowSelect" update=":frmAcoes" />
 
-			<p:column headerText="Empresa">
+			<p:column headerText="Razao Social/Empresa">
 				<h:outputText value="#{empresa.razaoSocial}" />
 			</p:column>
 
@@ -58,10 +73,6 @@
 
 			<p:column headerText="Cep">
 				<h:outputText value="#{empresa.cep}" />
-			</p:column>
-
-			<p:column headerText="Empresa">
-				<h:outputText value="#{empresa.razaoSocial}" />
 			</p:column>
 
 			<p:column headerText="Bairro">

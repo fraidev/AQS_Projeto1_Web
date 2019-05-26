@@ -1,6 +1,6 @@
 package bean;
 
-import domain.repository.BairroDao;
+import domain.repositories.BairroRepository;
 import domain.models.Bairro;
 import domain.models.Status;
 import infrastructure.tx.Transacional;
@@ -18,11 +18,21 @@ public class BairroBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private BairroDao bairroDao;
+	private BairroRepository bairroRepository;
 	private Bairro bairro;
 	private Bairro selected;
 	private List<Bairro> bairros = new ArrayList<>();
 	private Status status = Status.pesquisando;
+	private String nome;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 
 	public void solicitaIncluir() {
 		this.bairro = new Bairro();
@@ -32,6 +42,11 @@ public class BairroBean implements Serializable {
 	public void solicitaAlterar() {
 		this.bairro = selected;
 		status = Status.alterando;
+	}
+
+	public void pesquisar() {
+		this.bairros = bairroRepository.pesquisar(this.nome);
+		this.selected = null;
 	}
 
 	public void cancelar() {
@@ -47,7 +62,6 @@ public class BairroBean implements Serializable {
 		return (status == Status.alterando);
 	}
 	public boolean isMostraPesquisa() {
-		this.bairros = bairroDao.listaTodosPaginada(0, 10);
 		return (status == Status.pesquisando);
 	}
 	public boolean isDesabilitaAlteracao() {
@@ -75,30 +89,31 @@ public class BairroBean implements Serializable {
 	}
 
 	public List<Bairro> getTodos(){
-		return this.bairroDao.listaTodos();
+		return this.bairroRepository.listaTodos();
 	}
 
 	@Transacional
 	public void confirmaInclusao(){
-		this.bairroDao.adiciona(bairro);
+		this.bairroRepository.adiciona(bairro);
 		status = Status.pesquisando;
 	}
 
 	@Transacional
 	public void confirmaAlteracao() {
-		this.bairroDao.atualiza(bairro);
+		this.bairroRepository.atualiza(bairro);
 		this.selected = null;
 		status = Status.pesquisando;
 	}
 
 	@Transacional
 	public void solicitaExcluir() {
-		this.bairroDao.remove(selected);
+		this.bairroRepository.remove(selected);
 		this.selected = null;
 	}
 
 	@PostConstruct
 	public void init() {
+		this.bairros = bairroRepository.listaTodos();
 		System.out.println("@PostConstruct BairroBean.init();");
 	}
 }

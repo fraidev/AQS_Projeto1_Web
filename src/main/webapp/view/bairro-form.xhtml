@@ -11,6 +11,21 @@
 
 <h:body>
 
+	<h:form id="frmPesquisa" >
+		<p:panel style="width: 100%;" rendered="#{bairroBean.mostraPesquisa}">
+			<p:outputLabel value="Nome: " for="nomePesquisa" style="width: 200px;" />
+			<p:inputText id="nomePesquisa" value="#{bairroBean.nome}" />
+
+			<p:commandButton value="Pesquisar"
+							 style="float: right; position: relative;"
+							 actionListener="#{bairroBean.pesquisar()}"
+							 process="@form"
+							 update=":frmDataGrid"/>
+		</p:panel>
+	</h:form>
+
+	<br/>
+
 	<h:form id="frmAcoes" >
 		<p:panel rendered="#{bairroBean.mostraPesquisa}">
 			<p:commandButton value="Novo"

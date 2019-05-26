@@ -1,7 +1,8 @@
-package domain.repository;
+package domain.repositories;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -14,7 +15,7 @@ import domain.models.Cidade;
 
 @Named
 @RequestScoped
-public class CidadeDao implements Serializable {
+public class CidadeRepository implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,15 +41,13 @@ public class CidadeDao implements Serializable {
         dao.atualiza(cidade);
     }
 
-    public Cidade buscaPorId(Long id) {
-        return dao.buscaPorId(id);
-    }
-
-    public List<Cidade> listaTodosPaginada(int firstResult, int maxResults) {
-        return dao.listaTodosPaginada(firstResult, maxResults);
-    }
-
     public List<Cidade> listaTodos() {
         return dao.listaTodos();
+    }
+
+    public List<Cidade> pesquisar(String textoDePesquisa){
+        return dao.listaTodos().stream()
+                .filter(x -> x.getNome().contains(textoDePesquisa))
+                .collect(Collectors.toList());
     }
 }

@@ -1,19 +1,22 @@
-package domain.repository;
+package domain.repositories;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+
+import domain.models.Empresa;
 import domain.models.Fiscalizacao;
 
 
 @Named
 @RequestScoped
-public class FiscalizacaoDao implements Serializable {
+public class FiscalizacaoRepository implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,15 +42,19 @@ public class FiscalizacaoDao implements Serializable {
         dao.atualiza(fiscalizacao);
     }
 
-    public Fiscalizacao buscaPorId(Long id) {
-        return dao.buscaPorId(id);
-    }
-
     public List<Fiscalizacao> listaTodosPaginada(int firstResult, int maxResults) {
         return dao.listaTodosPaginada(firstResult, maxResults);
     }
 
     public List<Fiscalizacao> listaTodos() {
         return dao.listaTodos();
+    }
+
+    public List<Fiscalizacao> pesquisar(String textoDePesquisa){
+        return dao.listaTodos().stream()
+                .filter(x -> x.getRazaoSocial().contains(textoDePesquisa)
+                        || x.getEmpresa().getCnpj().contains(textoDePesquisa))
+                .limit(100)
+                .collect(Collectors.toList());
     }
 }

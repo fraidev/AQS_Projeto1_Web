@@ -1,14 +1,12 @@
 package bean;
 
-import domain.repository.FiscalizacaoDao;
+import domain.repositories.FiscalizacaoRepository;
 import domain.models.Fiscalizacao;
 import domain.models.Status;
 import infrastructure.tx.Transacional;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -20,13 +18,21 @@ public class FiscalizacaoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private FiscalizacaoDao fiscalizacaoDao;
+	private FiscalizacaoRepository fiscalizacaoRepository;
 	private Fiscalizacao fiscalizacao;
 	private Fiscalizacao selected;
 	private List<Fiscalizacao> fiscalizacaos = new ArrayList<>();
 	private Status status = Status.pesquisando;
-	private int page = 1;
-	
+	private String nome;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public void solicitaIncluir() {
 		this.fiscalizacao = new Fiscalizacao();
 		status = Status.incluindo;
@@ -35,6 +41,11 @@ public class FiscalizacaoBean implements Serializable {
 	public void solicitaAlterar() {
 		this.fiscalizacao = selected;
 		status = Status.alterando;
+	}
+
+	public void pesquisar() {
+		this.fiscalizacaos = fiscalizacaoRepository.pesquisar(this.nome);
+		this.selected = null;
 	}
 
 	public void cancelar() {
@@ -49,18 +60,7 @@ public class FiscalizacaoBean implements Serializable {
 	public boolean isAlterando() {
 		return (status == Status.alterando);
 	}
-	public void avancaPage() {
-		this.page ++;
-		this.fiscalizacaos = fiscalizacaoDao.listaTodosPaginada(this.page, 10);
-	}
-	public void voltaPage() {
-		if(this.page > 1) {
-			this.page --;
-		this.fiscalizacaos = fiscalizacaoDao.listaTodosPaginada(this.page, 10);
-		}
-	}
 	public boolean isMostraPesquisa() {
-		this.fiscalizacaos = fiscalizacaoDao.listaTodosPaginada(0, 10);
 		return (status == Status.pesquisando);
 	}
 	public boolean isDesabilitaAlteracao() {
@@ -88,30 +88,31 @@ public class FiscalizacaoBean implements Serializable {
 	}
 
 	public List<Fiscalizacao> getTodos(){
-		return this.fiscalizacaoDao.listaTodos();
+		return this.fiscalizacaoRepository.listaTodos();
 	}
 
 	@Transacional
 	public void confirmaInclusao(){
-		this.fiscalizacaoDao.adiciona(fiscalizacao);
+		this.fiscalizacaoRepository.adiciona(fiscalizacao);
 		status = Status.pesquisando;
 	}
 
 	@Transacional
 	public void confirmaAlteracao() {
-		this.fiscalizacaoDao.atualiza(fiscalizacao);
+		this.fiscalizacaoRepository.atualiza(fiscalizacao);
 		this.selected = null;
 		status = Status.pesquisando;
 	}
 
 	@Transacional
 	public void solicitaExcluir() {
-		this.fiscalizacaoDao.remove(selected);
+		this.fiscalizacaoRepository.remove(selected);
 		this.selected = null;
 	}
 
 	@PostConstruct
 	public void init() {
+		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 		System.out.println("@PostConstruct FiscalizacaoBean.init();");
 	}
 }

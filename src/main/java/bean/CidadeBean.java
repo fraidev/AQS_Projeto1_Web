@@ -1,6 +1,6 @@
 package bean;
 
-import domain.repository.CidadeDao;
+import domain.repositories.CidadeRepository;
 import domain.models.Cidade;
 import domain.models.Status;
 import infrastructure.tx.Transacional;
@@ -20,11 +20,21 @@ public class CidadeBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @Inject
-    private CidadeDao cidadeDao;
+    private CidadeRepository cidadeRepository;
     private Cidade cidade;
     private Cidade selected;
     private List<Cidade> cidades = new ArrayList<>();
 	private Status status = Status.pesquisando;
+	private String nome;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 
 	public void solicitaIncluir() {
 		this.cidade = new Cidade();
@@ -34,6 +44,11 @@ public class CidadeBean implements Serializable {
 	public void solicitaAlterar() {
 		this.cidade = selected;
 		status = Status.alterando;
+	}
+
+	public void pesquisar() {
+		this.cidades = cidadeRepository.pesquisar(this.nome);
+		this.selected = null;
 	}
 	
 	public void cancelar() {
@@ -49,7 +64,6 @@ public class CidadeBean implements Serializable {
 		return (status == Status.alterando);
 	}
 	public boolean isMostraPesquisa() {
-		this.cidades = cidadeDao.listaTodosPaginada(0, 10);
 		return (status == Status.pesquisando);
 	}
 	public boolean isDesabilitaAlteracao() {
@@ -77,30 +91,31 @@ public class CidadeBean implements Serializable {
 	}
 
 	public List<Cidade> getTodos(){
-		return this.cidadeDao.listaTodos();
+		return this.cidadeRepository.listaTodos();
 	}
 
 	@Transacional
 	public void confirmaInclusao(){
-		this.cidadeDao.adiciona(cidade);
+		this.cidadeRepository.adiciona(cidade);
 		status = Status.pesquisando;
 	}
 	
 	@Transacional
 	public void confirmaAlteracao() {
-		this.cidadeDao.atualiza(cidade);
+		this.cidadeRepository.atualiza(cidade);
 		this.selected = null;
 		status = Status.pesquisando;
 	}
 	
 	@Transacional
 	public void solicitaExcluir() {
-		this.cidadeDao.remove(selected);
+		this.cidadeRepository.remove(selected);
 		this.selected = null;
 	}
 	
 	@PostConstruct
 	public void init() {
+		this.cidades = cidadeRepository.listaTodos();
 		System.out.println("@PostConstruct CidadeBean.init();");
 	}
 }

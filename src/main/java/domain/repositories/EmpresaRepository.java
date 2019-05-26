@@ -1,19 +1,21 @@
-package domain.repository;
+package domain.repositories;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+
 import domain.models.Empresa;
 
 
 @Named
 @RequestScoped
-public class EmpresaDao implements Serializable {
+public class EmpresaRepository implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,15 +41,18 @@ public class EmpresaDao implements Serializable {
         dao.atualiza(empresa);
     }
 
-    public Empresa buscaPorId(Long id) {
-        return dao.buscaPorId(id);
+    public List<Empresa> listaTodos() {
+        return dao.listaTodos();
     }
 
     public List<Empresa> listaTodosPaginada(int firstResult, int maxResults) {
         return dao.listaTodosPaginada(firstResult, maxResults);
     }
 
-    public List<Empresa> listaTodos() {
-        return dao.listaTodos();
+    public List<Empresa> pesquisar(String textoDePesquisa){
+        return dao.listaTodos().stream()
+                .filter(x -> x.getRazaoSocial().contains(textoDePesquisa))
+                .limit(100)
+                .collect(Collectors.toList());
     }
 }
