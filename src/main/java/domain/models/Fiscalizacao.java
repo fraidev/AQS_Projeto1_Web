@@ -2,6 +2,7 @@ package domain.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -15,30 +16,26 @@ public class Fiscalizacao implements Serializable {
 	private Long id;
 	@Column(name = "data")
 	private LocalDate data;
-	@Column(name = "razaoSocial")
-	private String razaoSocial;
-	@Column(name = "logadouro")
-	private String logadouro;
-	@Column(name = "cep")
-	private String cep;
 	@ManyToOne
 	@JoinColumn(name="fiscal1Id")
 	private Fiscal fiscal1;
 	@ManyToOne
 	@JoinColumn(name="fiscal2Id")
 	private Fiscal fiscal2;
-	@OneToMany(mappedBy="fiscalizacao")
-	private List<Ocorrencia> ocorrencias;
-	@ManyToOne
+	@OneToMany(mappedBy = "fiscalizacao",
+			fetch = FetchType.EAGER,
+			cascade = CascadeType.PERSIST)
+	private List<Ocorrencia> ocorrencias = new ArrayList<>();
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="ufId")
 	private Uf uf;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="bairroId")
 	private Bairro bairro;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="CidadeId")
 	private Cidade cidade;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="EmpresaId")
 	private Empresa empresa;
 
@@ -47,12 +44,6 @@ public class Fiscalizacao implements Serializable {
 	}
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
-//		this.razaoSocial = empresa.getRazaoSocial();
-//		this.logadouro = empresa.getLogadouro();
-//		this.cep = empresa.getCep();
-//		this.bairro = empresa.getBairro();
-//		this.cidade = empresa.getCidade();
-//		this.uf = empresa.getUf();
 	}
 	
 	public Long getId() {
@@ -90,30 +81,6 @@ public class Fiscalizacao implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-
-	public String getLogadouro() {
-		return logadouro;
-	}
-
-	public void setLogadouro(String logadouro) {
-		this.logadouro = logadouro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 
 	public Uf getUf() {

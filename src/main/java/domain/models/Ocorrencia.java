@@ -15,7 +15,7 @@ public class Ocorrencia implements Serializable {
     private String nome;
     @Column(name = "codigo")
     private String codigo;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name="fiscalizacaoId")
     private Fiscalizacao fiscalizacao;
 

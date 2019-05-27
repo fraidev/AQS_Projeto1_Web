@@ -1,8 +1,11 @@
 package bean;
 
+import domain.models.Cidade;
+import domain.models.Uf;
 import domain.repositories.BairroRepository;
 import domain.models.Bairro;
 import domain.models.Status;
+import domain.repositories.UfRepository;
 import infrastructure.tx.Transacional;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,8 +22,11 @@ public class BairroBean implements Serializable {
 
 	@Inject
 	private BairroRepository bairroRepository;
+	@Inject
+	private UfRepository ufRepository;
 	private Bairro bairro;
 	private Bairro selected;
+	private List<Cidade> cidades = new ArrayList<>();
 	private List<Bairro> bairros = new ArrayList<>();
 	private Status status = Status.pesquisando;
 	private String nome;
@@ -88,6 +94,17 @@ public class BairroBean implements Serializable {
 		return this.bairro;
 	}
 
+	public List<Uf> getTodosUf(){
+		return this.ufRepository.listaTodos();
+	}
+
+	public void onUfChange() {
+		if(bairro.getUf() != null)
+			cidades = ufRepository.listaTodos().stream().filter(x  -> x.getId() == bairro.getUf().getId()).findFirst().get().getCidades();
+		else
+			cidades = new ArrayList<>();
+	}
+
 	public List<Bairro> getTodos(){
 		return this.bairroRepository.listaTodos();
 	}
@@ -118,5 +135,13 @@ public class BairroBean implements Serializable {
 	public void init() {
 		this.bairros = bairroRepository.listaTodos();
 		System.out.println("@PostConstruct BairroBean.init();");
+	}
+
+	public List<Cidade> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
 	}
 }

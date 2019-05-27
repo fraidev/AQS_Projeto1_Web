@@ -6,7 +6,6 @@
 <h:head>
 	<meta charset="UTF-8" />
 	<title>Projeto Web - Uf</title>
-	<link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
 </h:head>
 
 <h:body>
@@ -84,7 +83,7 @@
 
 	<h:form id="frmEdicao" >
 		<p:panelGrid columns="2" style="width: 100%;" rendered="#{ufBean.mostraEdicao}">
-			<p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
+			<p:outputLabel value="UF: " for="nome" style="width: 200px;" />
 			<p:inputText id="nome" value="#{ufBean.uf.nome}" />
 			
 			<p:outputLabel value="Sigla " for="sigla" style="width: 200px;" />

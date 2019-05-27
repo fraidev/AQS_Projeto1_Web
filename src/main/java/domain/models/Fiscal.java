@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="tb_fiscalizacao")
+@Table(name="tb_fiscal")
 public class Fiscal implements Serializable {
     private static final long serialVersionUID = 1L;
 

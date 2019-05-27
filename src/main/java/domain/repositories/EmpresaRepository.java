@@ -15,7 +15,7 @@ import domain.models.Empresa;
 
 @Named
 @RequestScoped
-public class EmpresaRepository implements Serializable {
+public class EmpresaRepository implements Serializable, Repository<Empresa> {
 
     private static final long serialVersionUID = 1L;
 

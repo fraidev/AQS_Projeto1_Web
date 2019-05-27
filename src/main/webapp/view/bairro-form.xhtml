@@ -6,7 +6,6 @@
 <h:head>
 	<meta charset="UTF-8" />
 	<title>Projeto Web - Bairro</title>
-	<link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
 </h:head>
 
 <h:body>
@@ -72,7 +71,7 @@
 			</p:column>
 
 			<p:column headerText="UF">
-				<h:outputText value="#{bairro.cidade.uf.sigla}" />
+				<h:outputText value="#{bairro.uf.sigla}" />
 			</p:column>
 
 
@@ -89,13 +88,21 @@
 
 	<h:form id="frmEdicao" >
 		<p:panelGrid columns="2" style="width: 100%;" rendered="#{bairroBean.mostraEdicao}">
-			<p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
-			<p:inputText id="nome" value="#{bairroBean.bairro.nome}" />
+			<p:outputLabel for="uf" value="UF:" />
+			<p:selectOneMenu id="uf" value="#{bairroBean.bairro.uf}" style="width:125px">
+				<p:ajax listener="#{bairroBean.onUfChange}" update="cidade" />
+				<f:selectItem itemLabel="Selecione Uf" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{bairroBean.todosUf}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}" />
+			</p:selectOneMenu>
 
 			<p:outputLabel for="cidade" value="Cidade:" />
 			<p:selectOneMenu id="cidade" value="#{bairroBean.bairro.cidade}" style="width:125px">
-				<f:selectItems value="#{cidadeBean.todos}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+				<f:selectItem itemLabel="Selecione Cidade" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{bairroBean.cidades}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
 			</p:selectOneMenu>
+
+			<p:outputLabel value="Bairro: " for="nome" style="width: 200px;" />
+			<p:inputText id="nome" value="#{bairroBean.bairro.nome}" />
 
 			<p:spacer />
 			<h:panelGroup>

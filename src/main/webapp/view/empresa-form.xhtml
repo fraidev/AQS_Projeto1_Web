@@ -6,7 +6,6 @@
 <h:head>
 	<meta charset="UTF-8" />
 	<title>Projeto Web - Empresa</title>
-	<link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
 </h:head>
 
 <h:body>
@@ -80,11 +79,11 @@
 			</p:column>
 
 			<p:column headerText="Cidade">
-				<h:outputText value="#{empresa.bairro.cidade.nome}" />
+				<h:outputText value="#{empresa.cidade.nome}" />
 			</p:column>
 
 			<p:column headerText="Uf">
-				<h:outputText value="#{empresa.bairro.cidade.uf.sigla}" />
+				<h:outputText value="#{empresa.uf.sigla}" />
 			</p:column>
 
 
@@ -117,9 +116,24 @@
 			<p:outputLabel value="Logadouro: " for="Logadouro" style="width: 200px;" />
 			<p:inputText id="Logadouro" value="#{empresaBean.empresa.logadouro}" />
 
+			<p:outputLabel for="uf" value="Uf:" />
+			<p:selectOneMenu id="uf" value="#{empresaBean.empresa.uf}" style="width:125px">
+				<p:ajax listener="#{dropdownView.onCountryChange}" update="cidade" />
+				<f:selectItem itemLabel="Selecione Uf" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{ufBean.todos}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="cidade" value="Cidade:" />
+			<p:selectOneMenu id="cidade" value="#{empresaBean.empresa.cidade}" style="width:125px">
+				<p:ajax listener="#{dropdownView.onCountryChange}" update="bairro" />
+				<f:selectItem itemLabel="Selecione Cidade" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{uf.cidades}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+			</p:selectOneMenu>
+
 			<p:outputLabel for="bairro" value="Bairro:" />
 			<p:selectOneMenu id="bairro" value="#{empresaBean.empresa.bairro}" style="width:125px">
-				<f:selectItems value="#{bairroBean.todos}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
+				<f:selectItem itemLabel="Selecione Bairro" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{cidade.bairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
 			</p:selectOneMenu>
 
 			<p:spacer />

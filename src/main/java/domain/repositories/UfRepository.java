@@ -15,7 +15,7 @@ import domain.models.Uf;
 
 @Named
 @RequestScoped
-public class UfRepository implements Serializable {
+public class UfRepository implements Serializable, Repository<Uf> {
 
 	private static final long serialVersionUID = 1L;
 

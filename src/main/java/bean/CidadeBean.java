@@ -64,7 +64,7 @@ public class CidadeBean implements Serializable {
 		return (status == Status.alterando);
 	}
 	public boolean isMostraPesquisa() {
-		return (status == Status.pesquisando);
+		return status == Status.pesquisando;
 	}
 	public boolean isDesabilitaAlteracao() {
 		return (selected == null);

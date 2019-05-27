@@ -16,7 +16,7 @@ import domain.models.Fiscalizacao;
 
 @Named
 @RequestScoped
-public class FiscalizacaoRepository implements Serializable {
+public class FiscalizacaoRepository implements Serializable, Repository<Fiscalizacao> {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +52,7 @@ public class FiscalizacaoRepository implements Serializable {
 
     public List<Fiscalizacao> pesquisar(String textoDePesquisa){
         return dao.listaTodos().stream()
-                .filter(x -> x.getRazaoSocial().contains(textoDePesquisa)
+                .filter(x -> x.getEmpresa().getRazaoSocial().contains(textoDePesquisa)
                         || x.getEmpresa().getCnpj().contains(textoDePesquisa))
                 .limit(100)
                 .collect(Collectors.toList());

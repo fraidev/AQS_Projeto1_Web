@@ -25,11 +25,13 @@ public class Uf  implements Serializable {
 	@Column(name = "nome")
 	private String nome;
 	@OneToMany(mappedBy="uf", cascade = CascadeType.ALL)
-	private List<Cidade> cidade;
+	private List<Bairro> bairros;
+	@OneToMany(mappedBy="uf", cascade = CascadeType.ALL)
+	private List<Cidade> cidades;
 	@OneToMany(mappedBy="uf")
-	private List<Empresa> empresa;
+	private List<Empresa> empresas;
 	@OneToMany(mappedBy="uf")
-	private List<Fiscalizacao> fiscalizacao;
+	private List<Fiscalizacao> fiscalizacoes;
 	
 	public Long getId() {
 		return id;
@@ -77,5 +79,37 @@ public class Uf  implements Serializable {
 	@Override
 	public String toString() {
 		return String.format("Uf:[%d, %s]", id, nome);
+	}
+
+	public List<Cidade> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
+
+	public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+
+	public List<Fiscalizacao> getFiscalizacoes() {
+		return fiscalizacoes;
+	}
+
+	public void setFiscalizacoes(List<Fiscalizacao> fiscalizacoes) {
+		this.fiscalizacoes = fiscalizacoes;
+	}
+
+	public List<Bairro> getBairros() {
+		return bairros;
+	}
+
+	public void setBairros(List<Bairro> bairros) {
+		this.bairros = bairros;
 	}
 }

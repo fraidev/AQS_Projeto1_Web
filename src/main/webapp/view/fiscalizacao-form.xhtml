@@ -6,7 +6,6 @@
 <h:head>
 	<meta charset="UTF-8" />
 	<title>Projeto Web - Fiscalizacao</title>
-	<link type="text/css" rel="stylesheet"	href="#{facesContext.externalContext.requestContextPath}/resources/css/estilo.css" />
 </h:head>
 
 <h:body>
@@ -103,8 +102,9 @@
 	</h:form>
 
 
-	<h:form id="frmEdicao" >
-		<p:panelGrid columns="2" style="width: 100%;" rendered="#{fiscalizacaoBean.mostraEdicao}">
+	<h:form id="frmEdicao" rendered="#{fiscalizacaoBean.mostraEdicao}">
+
+		<p:panelGrid columns="2" style="width: 100%;">
 			<p:outputLabel for="Data" value="Data:" style="width: 200px;"/>
 			<p:calendar id="Data" pattern="dd/MM/yyyy" mask="true" converter="localDateConverter" value="#{fiscalizacaoBean.fiscalizacao.data}" />
 
@@ -113,43 +113,81 @@
 				<f:selectItems value="#{empresaBean.todos}" var="empresa" itemLabel="#{empresa.razaoSocial}" itemValue="#{empresa}" />
 			</p:selectOneMenu>
 
-
 			<p:outputLabel for="Fiscal1" value="Fiscal 1:" />
 			<p:selectOneMenu id="Fiscal1" value="#{fiscalizacaoBean.fiscalizacao.fiscal1}" style="width:125px">
-				<f:selectItems value="#{fiscalizacaoBean.getTodosFiscais}" var="fiscal1" itemLabel="#{fiscal1.razaoSocial}" itemValue="#{fiscal1}" />
+				<f:selectItems value="#{fiscalBean.todos}" var="fiscal1" itemLabel="#{fiscal1.nome}" itemValue="#{fiscal1}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel for="Fiscal2" value="Fiscal 2:" />
 			<p:selectOneMenu id="Fiscal2" value="#{fiscalizacaoBean.fiscalizacao.fiscal2}" style="width:125px">
-				<f:selectItems value="#{fiscalizacaoBean.getTodosFiscais}" var="fiscal2" itemLabel="#{fiscal2.razaoSocial}" itemValue="#{fiscal2}" />
+				<f:selectItems value="#{fiscalBean.todos}" var="fiscal2" itemLabel="#{fiscal2.nome}" itemValue="#{fiscal2}" />
 			</p:selectOneMenu>
-
-
-
-			<p:spacer />
-			<h:panelGroup>
-				<p:commandButton value="Confirmar"
-								 rendered="#{fiscalizacaoBean.incluindo}"
-								 id="btn-incluir"
-								 style="margin-top: 20px;"
-								 actionListener="#{fiscalizacaoBean.confirmaInclusao()}"
-								 process="@form"
-								 update="@all"/>
-				<p:commandButton value="Alterar"
-								 rendered="#{fiscalizacaoBean.alterando}"
-								 id="btn-alterar"
-								 style="margin-top: 20px;"
-								 actionListener="#{fiscalizacaoBean.confirmaAlteracao()}"
-								 process="@form"
-								 update="@all"/>
-				<p:commandButton value="Cancelar"
-								 actionListener="#{fiscalizacaoBean.cancelar()}"
-								 id="btn-cancelar"
-								 style="margin-top: 20px;"
-								 process="@form"
-								 update="@all"/>
-			</h:panelGroup>
 		</p:panelGrid>
+
+		<p:spacer />
+
+		<p:panelGrid columns="2" style="width: 100%;">
+			<p:outputLabel value="Ocorrencia : " style="width: 200px;" />
+			<h:panelGroup>
+				<p:commandButton value="Criar Ocorrencia"
+								 rendered="#{fiscalizacaoBean.mostraEdicao}"
+								 id="btn-incluir-ocorrencia"
+								 style="margin-top: 20px;"
+								 actionListener="#{fiscalizacaoBean.criaOcorrencia()}"
+								 process="@form"/>
+			</h:panelGroup>
+
+			<p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
+			<p:inputText id="nome" value="#{fiscalizacaoBean.ocorrenciaEdicao.nome}" />
+
+			<p:outputLabel value="Codigo: " for="codigo" style="width: 200px;" />
+			<p:inputText id="codigo" value="#{fiscalizacaoBean.ocorrenciaEdicao.codigo}" />
+		</p:panelGrid>
+
+
+
+		<p:dataTable var="ocorrencia" value="#{fiscalizacaoBean.fiscalizacao.ocorrencias}"
+					 scrollable="true"
+					 scrollHeight="300"
+					 style="margin-top: 20px;"
+					 selectionMode="single"
+					 selection="#{fiscalizacaoBean.selectedOcorrencia}"
+					 rowKey="#{ocorrencia.id}"
+					 rendered="#{fiscalizacaoBean.mostraEdicao}">
+
+			<p:ajax event="rowSelect" update=":frmEdicao" />
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{ocorrencia.nome}" />
+			</p:column>
+			<p:column headerText="Codigo">
+				<h:outputText value="#{ocorrencia.codigo}" />
+			</p:column>
+
+		</p:dataTable>
+
+		<h:panelGroup>
+			<p:commandButton value="Confirmar"
+							 rendered="#{fiscalizacaoBean.incluindo}"
+							 id="btn-incluir"
+							 style="margin-top: 20px;"
+							 actionListener="#{fiscalizacaoBean.confirmaInclusao()}"
+							 process="@form"
+							 update="@all"/>
+			<p:commandButton value="Alterar"
+							 rendered="#{fiscalizacaoBean.alterando}"
+							 id="btn-alterar"
+							 style="margin-top: 20px;"
+							 actionListener="#{fiscalizacaoBean.confirmaAlteracao()}"
+							 process="@form"
+							 update="@all"/>
+			<p:commandButton value="Cancelar"
+							 actionListener="#{fiscalizacaoBean.cancelar()}"
+							 id="btn-cancelar"
+							 style="margin-top: 20px;"
+							 process="@form"
+							 update="@all"/>
+		</h:panelGroup>
 	</h:form>
 </h:body>
 

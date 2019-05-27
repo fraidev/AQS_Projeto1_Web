@@ -1,5 +1,7 @@
 package infrastructure.tx;
 
+import domain.repositories.Repository;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -11,5 +13,4 @@ import javax.interceptor.InterceptorBinding;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Transacional {
-
 }

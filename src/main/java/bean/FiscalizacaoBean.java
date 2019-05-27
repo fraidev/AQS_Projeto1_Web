@@ -1,10 +1,12 @@
 package bean;
 
 import domain.models.Fiscal;
+import domain.models.Ocorrencia;
 import domain.repositories.FiscalRepository;
 import domain.repositories.FiscalizacaoRepository;
 import domain.models.Fiscalizacao;
 import domain.models.Status;
+import domain.repositories.OcorrenciaRepository;
 import infrastructure.tx.Transacional;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,10 +25,15 @@ public class FiscalizacaoBean implements Serializable {
 	private FiscalizacaoRepository fiscalizacaoRepository;
 	@Inject
 	private FiscalRepository fiscalRepository;
+	@Inject
+	private OcorrenciaRepository ocorrenciaRepository;
 	private Fiscalizacao fiscalizacao;
+	private Ocorrencia ocorrenciaEdicao;
 	private Fiscalizacao selected;
+	private Ocorrencia selectedOcorrencia;
 	private List<Fiscalizacao> fiscalizacaos = new ArrayList<>();
 	private Status status = Status.pesquisando;
+	private Status statusOcorrencia = Status.pesquisando;
 	private String nome;
 
 	public String getNome() {
@@ -39,11 +46,13 @@ public class FiscalizacaoBean implements Serializable {
 
 	public void solicitaIncluir() {
 		this.fiscalizacao = new Fiscalizacao();
+		this.ocorrenciaEdicao = new Ocorrencia();
 		status = Status.incluindo;
 	}
 
 	public void solicitaAlterar() {
 		this.fiscalizacao = selected;
+		this.ocorrenciaEdicao = new Ocorrencia();
 		status = Status.alterando;
 	}
 
@@ -57,6 +66,10 @@ public class FiscalizacaoBean implements Serializable {
 	}
 	public boolean isMostraEdicao() {
 		return (status == Status.incluindo) || (status == Status.alterando);
+	}
+
+	public boolean isMostraEdicaoOcorrencia() {
+		return (statusOcorrencia == Status.incluindo) || (statusOcorrencia == Status.alterando);
 	}
 	public boolean isIncluindo() {
 		return (status == Status.incluindo);
@@ -99,6 +112,15 @@ public class FiscalizacaoBean implements Serializable {
 		return this.fiscalRepository.listaTodos();
 	}
 
+	public void criaOcorrencia(){
+		Ocorrencia ocorrencia = new Ocorrencia();
+		ocorrencia.setCodigo(this.ocorrenciaEdicao.getCodigo());
+		ocorrencia.setNome(this.ocorrenciaEdicao.getNome());
+		ocorrencia.setFiscalizacao(this.fiscalizacao);
+
+		this.fiscalizacao.getOcorrencias().add(ocorrencia);
+	}
+
 	@Transacional
 	public void confirmaInclusao(){
 		this.fiscalizacaoRepository.adiciona(fiscalizacao);
@@ -125,5 +147,29 @@ public class FiscalizacaoBean implements Serializable {
 	public void init() {
 		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 		System.out.println("@PostConstruct FiscalizacaoBean.init();");
+	}
+
+	public Ocorrencia getOcorrenciaEdicao() {
+		return ocorrenciaEdicao;
+	}
+
+	public void setOcorrenciaEdicao(Ocorrencia ocorrenciaEdicao) {
+		this.ocorrenciaEdicao = ocorrenciaEdicao;
+	}
+
+	public Status getStatusOcorrencia() {
+		return statusOcorrencia;
+	}
+
+	public void setStatusOcorrencia(Status statusOcorrencia) {
+		this.statusOcorrencia = statusOcorrencia;
+	}
+
+	public Ocorrencia getSelectedOcorrencia() {
+		return selectedOcorrencia;
+	}
+
+	public void setSelectedOcorrencia(Ocorrencia selectedOcorrencia) {
+		this.selectedOcorrencia = selectedOcorrencia;
 	}
 }

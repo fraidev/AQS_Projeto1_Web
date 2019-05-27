@@ -14,7 +14,7 @@ import domain.models.Bairro;
 
 @Named
 @RequestScoped
-public class BairroRepository implements Serializable {
+public class BairroRepository implements Serializable, Repository<Bairro> {
 
 	private static final long serialVersionUID = 1L;
 

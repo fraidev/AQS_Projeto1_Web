@@ -15,7 +15,7 @@ import domain.models.Cidade;
 
 @Named
 @RequestScoped
-public class CidadeRepository implements Serializable {
+public class CidadeRepository implements Serializable, Repository<Cidade> {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,14 +31,16 @@ public class CidadeRepository implements Serializable {
 
     public void adiciona(Cidade cidade) {
         dao.adiciona(cidade);
-    }
-
-    public void remove(Cidade cidade) {
-        dao.remove(cidade);
+        this.em.clear();
     }
 
     public void atualiza(Cidade cidade) {
         dao.atualiza(cidade);
+        this.em.clear();
+    }
+
+    public void remove(Cidade cidade) {
+        dao.remove(cidade);
     }
 
     public List<Cidade> listaTodos() {
