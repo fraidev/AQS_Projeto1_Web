@@ -29,14 +29,16 @@ public class OcorrenciaRepository implements Serializable, Repository<Ocorrencia
 
     public void adiciona(Ocorrencia ocorrencia) {
         dao.adiciona(ocorrencia);
-    }
-
-    public void remove(Ocorrencia ocorrencia) {
-        dao.remove(ocorrencia);
+        em.clear();
     }
 
     public void atualiza(Ocorrencia ocorrencia) {
         dao.atualiza(ocorrencia);
+        em.clear();
+    }
+
+    public void remove(Ocorrencia ocorrencia) {
+        dao.remove(ocorrencia);
     }
 
     public List<Ocorrencia> listaTodos() {

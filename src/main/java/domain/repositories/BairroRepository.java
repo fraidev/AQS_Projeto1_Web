@@ -30,14 +30,16 @@ public class BairroRepository implements Serializable, Repository<Bairro> {
 
 	public void adiciona(Bairro bairro) {
 		dao.adiciona(bairro);
-	}
-
-	public void remove(Bairro bairro) {
-		dao.remove(bairro);
+		em.clear();
 	}
 
 	public void atualiza(Bairro bairro) {
 		dao.atualiza(bairro);
+		em.clear();
+	}
+
+	public void remove(Bairro bairro) {
+		dao.remove(bairro);
 	}
 
 	public List<Bairro> listaTodos() {

@@ -31,14 +31,16 @@ public class EmpresaRepository implements Serializable, Repository<Empresa> {
 
     public void adiciona(Empresa empresa) {
         dao.adiciona(empresa);
-    }
-
-    public void remove(Empresa empresa) {
-        dao.remove(empresa);
+        em.clear();
     }
 
     public void atualiza(Empresa empresa) {
         dao.atualiza(empresa);
+        em.clear();
+    }
+
+    public void remove(Empresa empresa) {
+        dao.remove(empresa);
     }
 
     public List<Empresa> listaTodos() {

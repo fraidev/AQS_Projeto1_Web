@@ -32,14 +32,16 @@ public class FiscalizacaoRepository implements Serializable, Repository<Fiscaliz
 
     public void adiciona(Fiscalizacao fiscalizacao) {
         dao.adiciona(fiscalizacao);
-    }
-
-    public void remove(Fiscalizacao fiscalizacao) {
-        dao.remove(fiscalizacao);
+        em.clear();
     }
 
     public void atualiza(Fiscalizacao fiscalizacao) {
         dao.atualiza(fiscalizacao);
+        em.clear();
+    }
+
+    public void remove(Fiscalizacao fiscalizacao) {
+        dao.remove(fiscalizacao);
     }
 
     public List<Fiscalizacao> listaTodosPaginada(int firstResult, int maxResults) {

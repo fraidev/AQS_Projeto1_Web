@@ -31,14 +31,16 @@ public class UfRepository implements Serializable, Repository<Uf> {
 
 	public void adiciona(Uf uf) {
 		dao.adiciona(uf);
-	}
-
-	public void remove(Uf uf) {
-		dao.remove(uf);
+		em.clear();
 	}
 
 	public void atualiza(Uf uf) {
 		dao.atualiza(uf);
+		em.clear();
+	}
+
+	public void remove(Uf uf) {
+		dao.remove(uf);
 	}
 
 	public List<Uf> pesquisar(String textoDePesquisa){
