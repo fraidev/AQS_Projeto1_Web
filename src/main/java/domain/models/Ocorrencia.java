@@ -12,10 +12,10 @@ public class Ocorrencia implements Serializable {
     @GeneratedValue
     @Column(name = "id", updatable = false )
     private UUID id;
+    @Column(name = "codigo", unique=true)
+    private String codigo;
     @Column(name = "nome")
     private String nome;
-    @Column(name = "codigo")
-    private String codigo;
     @ManyToOne(fetch = FetchType.EAGER, optional=false)
     @JoinColumn(name="fiscalizacaoId")
     private Fiscalizacao fiscalizacao;
