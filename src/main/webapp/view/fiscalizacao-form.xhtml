@@ -134,7 +134,8 @@
 								 id="btn-incluir-ocorrencia"
 								 style="margin-top: 20px;"
 								 actionListener="#{fiscalizacaoBean.criaOcorrencia()}"
-								 process="@form"/>
+								 process="@form"
+								 update="ocorrencias"/>
 			</h:panelGroup>
 
 			<p:outputLabel value="Nome: " for="nome" style="width: 200px;" />
@@ -146,7 +147,8 @@
 
 
 
-		<p:dataTable var="ocorrencia" value="#{fiscalizacaoBean.fiscalizacao.ocorrencias}"
+		<p:dataTable id="ocorrencias"
+					 var="ocorrencia" value="#{fiscalizacaoBean.fiscalizacao.ocorrencias}"
 					 scrollable="true"
 					 scrollHeight="300"
 					 style="margin-top: 20px;"

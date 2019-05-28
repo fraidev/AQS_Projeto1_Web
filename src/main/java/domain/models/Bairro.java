@@ -18,8 +18,8 @@ public class Bairro  implements Serializable {
 	private Long id;
 	@Column(name = "cnpj")
 	private String nome;
-	@OneToMany(mappedBy="bairro")
-	private List<Fiscalizacao> fiscalizacoes;
+//	@OneToMany(mappedBy="bairro")
+//	private List<Fiscalizacao> fiscalizacoes;
 	@OneToMany(mappedBy="bairro")
 	private List<Empresa> Empresas;
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -31,12 +31,12 @@ public class Bairro  implements Serializable {
 	@JoinColumn(name="ufId")
 	private Uf uf;
 	
-	public List<Fiscalizacao> getFiscalizacoes() {
-		return fiscalizacoes;
-	}
-	public void setFiscalizacoes(List<Fiscalizacao> fiscalizacoes) {
-		this.fiscalizacoes = fiscalizacoes;
-	}
+//	public List<Fiscalizacao> getFiscalizacoes() {
+//		return fiscalizacoes;
+//	}
+//	public void setFiscalizacoes(List<Fiscalizacao> fiscalizacoes) {
+//		this.fiscalizacoes = fiscalizacoes;
+//	}
 	public List<Empresa> getEmpresas() {
 		return Empresas;
 	}

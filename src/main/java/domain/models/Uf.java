@@ -30,8 +30,8 @@ public class Uf  implements Serializable {
 	private List<Cidade> cidades;
 	@OneToMany(mappedBy="uf")
 	private List<Empresa> empresas;
-	@OneToMany(mappedBy="uf")
-	private List<Fiscalizacao> fiscalizacoes;
+//	@OneToMany(mappedBy="uf")
+//	private List<Fiscalizacao> fiscalizacoes;
 	
 	public Long getId() {
 		return id;
@@ -97,13 +97,13 @@ public class Uf  implements Serializable {
 		this.empresas = empresas;
 	}
 
-	public List<Fiscalizacao> getFiscalizacoes() {
-		return fiscalizacoes;
-	}
-
-	public void setFiscalizacoes(List<Fiscalizacao> fiscalizacoes) {
-		this.fiscalizacoes = fiscalizacoes;
-	}
+//	public List<Fiscalizacao> getFiscalizacoes() {
+//		return fiscalizacoes;
+//	}
+//
+//	public void setFiscalizacoes(List<Fiscalizacao> fiscalizacoes) {
+//		this.fiscalizacoes = fiscalizacoes;
+//	}
 
 	public List<Bairro> getBairros() {
 		return bairros;

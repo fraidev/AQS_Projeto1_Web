@@ -16,26 +16,26 @@ public class Fiscalizacao implements Serializable {
 	private Long id;
 	@Column(name = "data")
 	private LocalDate data;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="fiscal1Id")
 	private Fiscal fiscal1;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="fiscal2Id")
 	private Fiscal fiscal2;
 	@OneToMany(mappedBy = "fiscalizacao",
 			fetch = FetchType.EAGER,
 			cascade = CascadeType.PERSIST)
 	private List<Ocorrencia> ocorrencias = new ArrayList<>();
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="ufId")
-	private Uf uf;
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="bairroId")
-	private Bairro bairro;
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="CidadeId")
-	private Cidade cidade;
-	@ManyToOne(cascade = CascadeType.ALL)
+//	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name="ufId")
+//	private Uf uf;
+//	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name="bairroId")
+//	private Bairro bairro;
+//	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name="CidadeId")
+//	private Cidade cidade;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="EmpresaId")
 	private Empresa empresa;
 
@@ -83,29 +83,29 @@ public class Fiscalizacao implements Serializable {
 		return true;
 	}
 
-	public Uf getUf() {
-		return uf;
-	}
+//	public Uf getUf() {
+//		return uf;
+//	}
 
-	public void setUf(Uf uf) {
-		this.uf = uf;
-	}
-
-	public Bairro getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(Bairro bairro) {
-		this.bairro = bairro;
-	}
-
-	public Cidade getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
+//	public void setUf(Uf uf) {
+//		this.uf = uf;
+//	}
+//
+//	public Bairro getBairro() {
+//		return bairro;
+//	}
+//
+//	public void setBairro(Bairro bairro) {
+//		this.bairro = bairro;
+//	}
+//
+//	public Cidade getCidade() {
+//		return cidade;
+//	}
+//
+//	public void setCidade(Cidade cidade) {
+//		this.cidade = cidade;
+//	}
 
 	public Fiscal getFiscal1() {
 		return fiscal1;
