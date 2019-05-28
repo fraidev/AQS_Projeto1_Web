@@ -24,6 +24,7 @@ public class BairroBean implements Serializable {
 	private BairroRepository bairroRepository;
 	@Inject
 	private UfRepository ufRepository;
+	private Cidade cidade;
 	private Bairro bairro;
 	private Bairro selected;
 	private List<Cidade> cidades = new ArrayList<>();
@@ -47,6 +48,7 @@ public class BairroBean implements Serializable {
 
 	public void solicitaAlterar() {
 		this.bairro = selected;
+		this.onUfChange();
 		status = Status.alterando;
 	}
 
@@ -57,6 +59,7 @@ public class BairroBean implements Serializable {
 
 	public void cancelar() {
 		status = Status.pesquisando;
+		this.bairros = bairroRepository.listaTodos();
 	}
 	public boolean isMostraEdicao() {
 		return (status == Status.incluindo) || (status == Status.alterando);
@@ -105,10 +108,6 @@ public class BairroBean implements Serializable {
 			cidades = new ArrayList<>();
 	}
 
-	public List<Bairro> getTodos(){
-		return this.bairroRepository.listaTodos();
-	}
-
 	@Transacional
 	public void confirmaInclusao(){
 		this.bairroRepository.adiciona(bairro);
@@ -143,5 +142,13 @@ public class BairroBean implements Serializable {
 
 	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 }

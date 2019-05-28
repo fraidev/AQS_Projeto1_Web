@@ -28,12 +28,10 @@ public class FiscalRepository  implements Serializable, Repository<Fiscal> {
 
     public void adiciona(Fiscal fiscal) {
         dao.adiciona(fiscal);
-        em.clear();
     }
 
     public void atualiza(Fiscal fiscal) {
         dao.atualiza(fiscal);
-        em.clear();
     }
 
     public void remove(Fiscal fiscal) {

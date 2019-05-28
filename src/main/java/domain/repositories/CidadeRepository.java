@@ -31,12 +31,10 @@ public class CidadeRepository implements Serializable, Repository<Cidade> {
 
     public void adiciona(Cidade cidade) {
         dao.adiciona(cidade);
-        this.em.clear();
     }
 
     public void atualiza(Cidade cidade) {
         dao.atualiza(cidade);
-        this.em.clear();
     }
 
     public void remove(Cidade cidade) {

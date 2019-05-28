@@ -53,6 +53,7 @@ public class CidadeBean implements Serializable {
 	
 	public void cancelar() {
 		status = Status.pesquisando;
+		this.cidades = getTodos();
 	}
 	public boolean isMostraEdicao() {
 		return (status == Status.incluindo) || (status == Status.alterando);

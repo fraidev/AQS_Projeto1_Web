@@ -1,8 +1,10 @@
 package bean;
 
+import domain.models.*;
+import domain.repositories.BairroRepository;
+import domain.repositories.CidadeRepository;
 import domain.repositories.EmpresaRepository;
-import domain.models.Empresa;
-import domain.models.Status;
+import domain.repositories.UfRepository;
 import domain.services.CpfCnpjUtils;
 import infrastructure.tx.Transacional;
 
@@ -24,8 +26,19 @@ public class EmpresaBean implements Serializable {
 
 	@Inject
 	private EmpresaRepository empresaRepository;
+	@Inject
+	private CidadeRepository cidadeRepository;
+	@Inject
+	private BairroRepository bairroRepository;
+	@Inject
+	private UfRepository ufRepository;
+	private Cidade cidade;
+	private Bairro bairro;
+	private Uf uf;
 	private Empresa empresa;
 	private Empresa selected;
+	private List<Bairro> bairros = new ArrayList<>();
+	private List<Cidade> cidades = new ArrayList<>();
 	private List<Empresa> empresas = new ArrayList<>();
 	private Status status = Status.pesquisando;
 	private String nome;
@@ -47,6 +60,8 @@ public class EmpresaBean implements Serializable {
 
 	public void solicitaAlterar() {
 		this.empresa = selected;
+		this.onUfChange();
+		this.onCidadeChange();
 		status = Status.alterando;
 	}
 
@@ -57,6 +72,7 @@ public class EmpresaBean implements Serializable {
 
 	public void cancelar() {
 		status = Status.pesquisando;
+		this.empresas = empresaRepository.listaTodosPaginada(0, 100);
 	}
 	public boolean isMostraEdicao() {
 		return (status == Status.incluindo) || (status == Status.alterando);
@@ -94,8 +110,26 @@ public class EmpresaBean implements Serializable {
 		return this.empresa;
 	}
 
+	public void onUfChange() {
+		if(empresa.getUf() != null)
+			cidades = ufRepository.listaTodos().stream().filter(x  -> x.getId() == empresa.getUf().getId()).findFirst().get().getCidades();
+		else
+			cidades = new ArrayList<>();
+	}
+
+	public void onCidadeChange() {
+		if(empresa.getCidade() != null)
+			bairros = cidadeRepository.listaTodos().stream().filter(x  -> x.getId() == empresa.getCidade().getId()).findFirst().get().getBairros();
+		else
+			bairros = new ArrayList<>();
+	}
+
 	public List<Empresa> getTodos(){
 		return this.empresaRepository.listaTodos();
+	}
+
+	public List<Uf> getTodosUf(){
+		return this.ufRepository.listaTodos();
 	}
 
 	@Transacional
@@ -142,5 +176,41 @@ public class EmpresaBean implements Serializable {
 
 	public void setWarning(String warning) {
 		this.warning = warning;
+	}
+
+	public List<Cidade> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
+
+	public Uf getUf() {
+		return uf;
+	}
+
+	public void setUf(Uf uf) {
+		this.uf = uf;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public void setBairro(Bairro bairro) {
+		this.bairro = bairro;
+	}
+
+	public List<Bairro> getBairros() {
+		return bairros;
+	}
+
+	public void setBairros(List<Bairro> bairros) {
+		this.bairros = bairros;
 	}
 }

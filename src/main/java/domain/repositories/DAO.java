@@ -20,6 +20,7 @@ public class DAO<T> implements Serializable {
 	
 	public void adiciona(T obj) {
 		em.persist(obj);
+		em.clear();
 	}
 
 	public void remove(T obj) {
@@ -27,7 +28,7 @@ public class DAO<T> implements Serializable {
 	}
 
 	public void atualiza(T obj) {
-		em.merge(obj);
+		em.persist(em.merge(obj));
 	}
 
 	public List<T> listaTodos() {

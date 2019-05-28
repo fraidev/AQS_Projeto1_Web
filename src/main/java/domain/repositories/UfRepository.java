@@ -31,12 +31,10 @@ public class UfRepository implements Serializable, Repository<Uf> {
 
 	public void adiciona(Uf uf) {
 		dao.adiciona(uf);
-		em.clear();
 	}
 
 	public void atualiza(Uf uf) {
 		dao.atualiza(uf);
-		em.clear();
 	}
 
 	public void remove(Uf uf) {

@@ -118,22 +118,22 @@
 
 			<p:outputLabel for="uf" value="Uf:" />
 			<p:selectOneMenu id="uf" value="#{empresaBean.empresa.uf}" style="width:125px">
-				<p:ajax listener="#{dropdownView.onCountryChange}" update="cidade" />
+				<p:ajax listener="#{empresaBean.onUfChange}" update="cidade" />
 				<f:selectItem itemLabel="Selecione Uf" itemValue="" noSelectionOption="true" />
-				<f:selectItems value="#{ufBean.todos}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}" />
+				<f:selectItems value="#{empresaBean.todosUf}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel for="cidade" value="Cidade:" />
 			<p:selectOneMenu id="cidade" value="#{empresaBean.empresa.cidade}" style="width:125px">
-				<p:ajax listener="#{dropdownView.onCountryChange}" update="bairro" />
+				<p:ajax listener="#{empresaBean.onCidadeChange}" update="bairro" />
 				<f:selectItem itemLabel="Selecione Cidade" itemValue="" noSelectionOption="true" />
-				<f:selectItems value="#{uf.cidades}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+				<f:selectItems value="#{empresaBean.cidades}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel for="bairro" value="Bairro:" />
 			<p:selectOneMenu id="bairro" value="#{empresaBean.empresa.bairro}" style="width:125px">
-				<f:selectItem itemLabel="Selecione Bairro" itemValue="" noSelectionOption="true" />
-				<f:selectItems value="#{cidade.bairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
+				<f:selectItem itemLabel="Selecione Cidade" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{empresaBean.bairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
 			</p:selectOneMenu>
 
 			<p:spacer />
