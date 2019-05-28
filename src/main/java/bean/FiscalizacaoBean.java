@@ -6,7 +6,6 @@ import domain.repositories.FiscalRepository;
 import domain.repositories.FiscalizacaoRepository;
 import domain.models.Fiscalizacao;
 import domain.models.Status;
-import domain.repositories.OcorrenciaRepository;
 import infrastructure.tx.Transacional;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,8 +25,6 @@ public class FiscalizacaoBean implements Serializable {
 	private FiscalizacaoRepository fiscalizacaoRepository;
 	@Inject
 	private FiscalRepository fiscalRepository;
-	@Inject
-	private OcorrenciaRepository ocorrenciaRepository;
 	private Fiscalizacao fiscalizacao;
 	private Ocorrencia ocorrenciaEdicao;
 	private Fiscalizacao selected;
@@ -70,9 +67,6 @@ public class FiscalizacaoBean implements Serializable {
 		return (status == Status.incluindo) || (status == Status.alterando);
 	}
 
-	public boolean isMostraEdicaoOcorrencia() {
-		return (statusOcorrencia == Status.incluindo) || (statusOcorrencia == Status.alterando);
-	}
 	public boolean isIncluindo() {
 		return (status == Status.incluindo);
 	}
