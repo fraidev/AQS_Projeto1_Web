@@ -37,7 +37,6 @@ public class DAO<T> implements Serializable {
 		query.select(query.from(classe));
 
 		List<T> lista = em.createQuery(query).getResultList();
-
 		return lista;
 	}
 

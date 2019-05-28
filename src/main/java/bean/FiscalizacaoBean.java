@@ -103,6 +103,9 @@ public class FiscalizacaoBean implements Serializable {
 	public Fiscalizacao getFiscalizacao() {
 		return this.fiscalizacao;
 	}
+	public void setFiscalizacao(Fiscalizacao fiscalizacao) {
+		this.fiscalizacao = fiscalizacao;
+	}
 
 	public List<Fiscalizacao> getTodos(){
 		return this.fiscalizacaoRepository.listaTodos();

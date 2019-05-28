@@ -16,10 +16,10 @@ public class Fiscalizacao implements Serializable {
 	private Long id;
 	@Column(name = "data")
 	private LocalDate data;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne
 	@JoinColumn(name="fiscal1Id")
 	private Fiscal fiscal1;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne
 	@JoinColumn(name="fiscal2Id")
 	private Fiscal fiscal2;
 	@OneToMany(mappedBy = "fiscalizacao",
@@ -35,7 +35,7 @@ public class Fiscalizacao implements Serializable {
 //	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name="CidadeId")
 //	private Cidade cidade;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(optional = false)
     @JoinColumn(name="EmpresaId")
 	private Empresa empresa;
 

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Named
 @RequestScoped
-public class FiscalRepository  implements Serializable, Repository<Fiscal> {
+public class FiscalRepository implements Serializable, Repository<Fiscal> {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,6 +28,10 @@ public class FiscalRepository  implements Serializable, Repository<Fiscal> {
 
     public void adiciona(Fiscal fiscal) {
         dao.adiciona(fiscal);
+    }
+
+    public Fiscal buscaPorId(Long id){
+        return dao.buscaPorId(id);
     }
 
     public void atualiza(Fiscal fiscal) {

@@ -22,11 +22,11 @@ public class Bairro  implements Serializable {
 //	private List<Fiscalizacao> fiscalizacoes;
 	@OneToMany(mappedBy="bairro")
 	private List<Empresa> Empresas;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(optional = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="cidadeId")
 	private Cidade cidade;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(optional = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="ufId")
 	private Uf uf;

@@ -20,13 +20,13 @@ public class Empresa implements Serializable {
 	private String logadouro;
 	@Column(name = "cep")
 	private String cep;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne( optional = false)
     @JoinColumn(name="bairroId")
 	private Bairro bairro;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="cidadeId")
 	private Cidade cidade;
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="ufId")
 	private Uf uf;
 	@OneToMany(mappedBy="empresa")
