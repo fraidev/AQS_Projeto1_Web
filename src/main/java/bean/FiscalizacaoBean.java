@@ -11,6 +11,7 @@ import infrastructure.tx.Transacional;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -63,6 +64,7 @@ public class FiscalizacaoBean implements Serializable {
 
 	public void cancelar() {
 		status = Status.pesquisando;
+		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 	}
 	public boolean isMostraEdicao() {
 		return (status == Status.incluindo) || (status == Status.alterando);
@@ -119,6 +121,7 @@ public class FiscalizacaoBean implements Serializable {
 		Ocorrencia ocorrencia = new Ocorrencia();
 		ocorrencia.setCodigo(this.ocorrenciaEdicao.getCodigo());
 		ocorrencia.setNome(this.ocorrenciaEdicao.getNome());
+		ocorrencia.setId(UUID.randomUUID());
 		ocorrencia.setFiscalizacao(this.fiscalizacao);
 
 		this.fiscalizacao.getOcorrencias().add(ocorrencia);
@@ -126,7 +129,7 @@ public class FiscalizacaoBean implements Serializable {
 
 	@Transacional
 	public void confirmaInclusao(){
-		this.fiscalizacaoRepository.adiciona(fiscalizacao);
+		this.fiscalizacaoRepository.atualiza(fiscalizacao);
 		status = Status.pesquisando;
 		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 	}

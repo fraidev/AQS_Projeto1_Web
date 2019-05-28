@@ -2,27 +2,28 @@ package domain.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Table(name="tb_ocorrencia")
 public class Ocorrencia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @GeneratedValue
+    @Column(name = "id", updatable = false )
+    private UUID id;
     @Column(name = "nome")
     private String nome;
     @Column(name = "codigo")
     private String codigo;
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.EAGER, optional=false)
     @JoinColumn(name="fiscalizacaoId")
     private Fiscalizacao fiscalizacao;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
     public String getNome() {

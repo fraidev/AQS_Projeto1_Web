@@ -147,26 +147,27 @@
 
 
 
-		<p:dataTable id="ocorrencias"
-					 var="ocorrencia" value="#{fiscalizacaoBean.fiscalizacao.ocorrencias}"
-					 scrollable="true"
-					 scrollHeight="300"
-					 style="margin-top: 20px;"
-					 selectionMode="single"
-					 selection="#{fiscalizacaoBean.selectedOcorrencia}"
-					 rowKey="#{ocorrencia.id}"
-					 rendered="#{fiscalizacaoBean.mostraEdicao}">
+		<h:panelGroup id="ocorrencias">
+			<p:dataTable var="ocorrencia" value="#{fiscalizacaoBean.fiscalizacao.ocorrencias}"
+						 scrollable="true"
+						 scrollHeight="300"
+						 style="margin-top: 20px;"
+						 selectionMode="single"
+						 selection="#{fiscalizacaoBean.selectedOcorrencia}"
+						 rowKey="#{ocorrencia.id}"
+						 rendered="#{fiscalizacaoBean.mostraEdicao}">
 
-			<p:ajax event="rowSelect" update=":frmEdicao" />
+				<p:ajax event="rowSelect" update=":frmEdicao" />
 
-			<p:column headerText="Nome">
-				<h:outputText value="#{ocorrencia.nome}" />
-			</p:column>
-			<p:column headerText="Codigo">
-				<h:outputText value="#{ocorrencia.codigo}" />
-			</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{ocorrencia.nome}" />
+				</p:column>
+				<p:column headerText="Codigo">
+					<h:outputText value="#{ocorrencia.codigo}" />
+				</p:column>
 
-		</p:dataTable>
+			</p:dataTable>
+		</h:panelGroup>
 
 		<h:panelGroup>
 			<p:commandButton value="Confirmar"
