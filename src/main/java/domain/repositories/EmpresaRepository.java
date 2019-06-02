@@ -11,6 +11,8 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 
 import domain.models.Empresa;
+import infrastructure.persistence.DAO;
+import infrastructure.persistence.Repository;
 
 
 @Named

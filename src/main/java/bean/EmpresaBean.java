@@ -1,5 +1,6 @@
 package bean;
 
+import bean.models.Status;
 import domain.models.*;
 import domain.repositories.BairroRepository;
 import domain.repositories.CidadeRepository;

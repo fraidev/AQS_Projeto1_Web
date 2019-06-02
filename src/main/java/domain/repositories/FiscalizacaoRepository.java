@@ -10,8 +10,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
-import domain.models.Empresa;
 import domain.models.Fiscalizacao;
+import infrastructure.persistence.DAO;
+import infrastructure.persistence.Repository;
 
 
 @Named

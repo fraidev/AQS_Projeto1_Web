@@ -1,10 +1,10 @@
 package bean;
 
+import bean.models.Status;
 import domain.models.Cidade;
 import domain.models.Uf;
 import domain.repositories.BairroRepository;
 import domain.models.Bairro;
-import domain.models.Status;
 import domain.repositories.UfRepository;
 import infrastructure.tx.Transacional;
 import java.io.Serializable;

@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import domain.models.Bairro;
+import infrastructure.persistence.DAO;
+import infrastructure.persistence.Repository;
 
 
 @Named

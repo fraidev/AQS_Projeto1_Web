@@ -1,6 +1,9 @@
 package domain.repositories;
 
 import domain.models.Fiscal;
+import infrastructure.persistence.DAO;
+import infrastructure.persistence.Repository;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

@@ -26,8 +26,6 @@ public class Cidade implements Serializable {
 	private String nome;
 	@OneToMany(mappedBy="cidade", cascade = CascadeType.ALL)
 	private List<Bairro> bairros;
-//	@OneToMany(mappedBy="cidade")
-//	private List<Fiscalizacao> fiscalizacoes;
 	@OneToMany(mappedBy="cidade")
 	private List<Empresa> empresas;
 	@ManyToOne
@@ -40,12 +38,6 @@ public class Cidade implements Serializable {
 	public void setBairros(List<Bairro> bairros) {
 		this.bairros = bairros;
 	}
-//	public List<Fiscalizacao> getFiscalizacoes() {
-//		return fiscalizacoes;
-//	}
-//	public void setFiscalizacoes(List<Fiscalizacao> fiscalizacoes) {
-//		this.fiscalizacoes = fiscalizacoes;
-//	}
 	public List<Empresa> getEmpresas() {
 		return empresas;
 	}

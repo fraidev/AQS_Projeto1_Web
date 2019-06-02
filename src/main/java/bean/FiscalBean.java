@@ -1,8 +1,8 @@
 package bean;
 
+import bean.models.Status;
 import domain.repositories.FiscalRepository;
 import domain.models.Fiscal;
-import domain.models.Status;
 import infrastructure.tx.Transacional;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
 package bean;
 
+import bean.models.Status;
 import domain.repositories.CidadeRepository;
 import domain.models.Cidade;
-import domain.models.Status;
 import infrastructure.tx.Transacional;
 
 import java.io.Serializable;

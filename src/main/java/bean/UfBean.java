@@ -9,10 +9,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import domain.models.Bairro;
-import domain.models.Cidade;
+import bean.models.Status;
 import domain.repositories.UfRepository;
-import domain.models.Status;
 import domain.models.Uf;
 import infrastructure.tx.Transacional;
 

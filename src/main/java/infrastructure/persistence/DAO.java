@@ -1,4 +1,4 @@
-package domain.repositories;
+package infrastructure.persistence;
 
 import java.io.Serializable;
 import java.util.List;
