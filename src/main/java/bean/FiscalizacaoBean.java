@@ -115,7 +115,7 @@ public class FiscalizacaoBean implements Serializable {
 		Ocorrencia ocorrencia = new Ocorrencia();
 		ocorrencia.setCodigo(this.ocorrenciaEdicao.getCodigo());
 		ocorrencia.setNome(this.ocorrenciaEdicao.getNome());
-		ocorrencia.setId(UUID.randomUUID());
+//		ocorrencia.setId(UUID.randomUUID());
 		ocorrencia.setFiscalizacao(this.fiscalizacao);
 
 		this.fiscalizacao.getOcorrencias().add(ocorrencia);

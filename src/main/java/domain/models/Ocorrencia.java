@@ -9,21 +9,21 @@ import java.util.UUID;
 public class Ocorrencia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false )
-    private UUID id;
+    private Long id;
     @Column(name = "codigo", unique=true)
     private String codigo;
     @Column(name = "nome")
     private String nome;
-    @ManyToOne(fetch = FetchType.EAGER, optional=false)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="fiscalizacaoId")
     private Fiscalizacao fiscalizacao;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNome() {

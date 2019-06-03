@@ -16,29 +16,4 @@ public class HomeBean implements Serializable {
 	public void init() {
 		System.out.println("HomeBean ");
 	}
-
-	public String back() {
-		return "home-form.xhtml";
-	}
-	
-	public String openUf() {
-		return "/view/uf-form.xhtml";
-	}
-	
-	public String openCidade() {
-		return "/view/cidade-form.xhtml";
-	}
-	
-	public String openBairro() {
-		return "/view/bairro-form.xhtml";
-	}
-	
-	public String openEmpresa() {
-		return "/view/empresa-form.xhtml";
-	}
-	
-	public String openFiscalizacao() {
-		return "/view/fiscalizacao-form.xhtml";
-	}
-	
 }
