@@ -1,6 +1,7 @@
 package domain.repositories;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+
+import domain.models.Bairro;
 import domain.models.Bairro;
 import infrastructure.persistence.DAO;
 import infrastructure.persistence.Repository;
@@ -46,9 +51,16 @@ public class BairroRepository implements Serializable, Repository<Bairro> {
 		return dao.listaTodos();
 	}
 
-	public List<Bairro> pesquisar(String textoDePesquisa){
-		return dao.listaTodos().stream()
-				.filter(x -> x.getNome().contains(textoDePesquisa))
-				.collect(Collectors.toList());
+
+	public List<Bairro> pesquisar(String textoDePesquisa) {
+		String jpqlBairro = "select u from Bairro u where u.nome like :pNome";
+		TypedQuery<Bairro> queryBairro = this.em.createQuery(jpqlBairro, Bairro.class);
+		queryBairro.setParameter("pNome", "%" + textoDePesquisa + "%");
+		try {
+			return queryBairro.getResultList();
+		} catch(NoResultException ex) {
+			System.out.println(this.em);
+		}
+		return new ArrayList<>();
 	}
 }

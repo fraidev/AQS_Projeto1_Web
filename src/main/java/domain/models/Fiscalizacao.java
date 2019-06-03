@@ -97,6 +97,10 @@ public class Fiscalizacao implements Serializable {
 		return ocorrencias;
 	}
 
+	public int getQuantidadeOcorrencias(){
+		return getOcorrencias().size();
+	}
+
 	public void setOcorrencias(List<Ocorrencia> ocorrencias) {
 		this.ocorrencias = ocorrencias;
 	}

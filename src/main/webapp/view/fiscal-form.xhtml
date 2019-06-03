@@ -12,7 +12,7 @@
 
     <h:form id="frmPesquisa" >
         <p:panel style="width: 100%;" rendered="#{fiscalBean.mostraPesquisa}">
-            <p:outputLabel value="Nome: " for="nomePesquisa" style="width: 200px;" />
+            <p:outputLabel value="Nome do Fiscal: " for="nomePesquisa" style="width: 200px;" />
             <p:inputText id="nomePesquisa" value="#{fiscalBean.nome}" />
 
             <p:commandButton value="Pesquisar"
@@ -62,19 +62,19 @@
 
             <p:ajax event="rowSelect" update=":frmAcoes" />
 
-            <p:column headerText="fiscal">
+            <p:column headerText="Nome do Fiscal">
                 <h:outputText value="#{fiscal.nome}" />
             </p:column>
 
-            <p:column headerText="Cpf">
+            <p:column headerText="CPF">
                 <h:outputText value="#{fiscal.cpf}" />
             </p:column>
 
-            <p:column headerText="dataDeNascimento">
+            <p:column headerText="Data de Nascimento">
                 <h:outputText value="#{fiscal.dataDeNascimento}" />
             </p:column>
 
-            <p:column headerText="dataDeContratacao">
+            <p:column headerText="Data De Contratacao">
                 <h:outputText value="#{fiscal.dataDeContratacao}" />
             </p:column>
 

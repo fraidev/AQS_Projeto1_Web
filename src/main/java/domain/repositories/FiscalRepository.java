@@ -1,6 +1,7 @@
 package domain.repositories;
 
 import domain.models.Fiscal;
+import domain.models.Fiscal;
 import infrastructure.persistence.DAO;
 import infrastructure.persistence.Repository;
 
@@ -9,7 +10,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,10 +57,15 @@ public class FiscalRepository implements Serializable, Repository<Fiscal> {
         return dao.listaTodos();
     }
 
-    public List<Fiscal> pesquisar(String textoDePesquisa){
-        return dao.listaTodos().stream()
-                .filter(x -> x.getNome().contains(textoDePesquisa))
-                .limit(100)
-                .collect(Collectors.toList());
+    public List<Fiscal> pesquisar(String textoDePesquisa) {
+        String jpqlFiscal = "select u from Fiscal u where u.nome like :pNome or u.cpf like :pNome";
+        TypedQuery<Fiscal> queryFiscal = this.em.createQuery(jpqlFiscal, Fiscal.class);
+        queryFiscal.setParameter("pNome", "%" + textoDePesquisa + "%");
+        try {
+            return queryFiscal.getResultList();
+        } catch(NoResultException ex) {
+            System.out.println(this.em);
+        }
+        return new ArrayList<>();
     }
 }

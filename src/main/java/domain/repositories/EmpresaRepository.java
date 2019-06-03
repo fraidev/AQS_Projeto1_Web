@@ -1,6 +1,7 @@
 package domain.repositories;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +10,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
+import domain.models.Empresa;
 import domain.models.Empresa;
 import infrastructure.persistence.DAO;
 import infrastructure.persistence.Repository;
@@ -51,10 +55,15 @@ public class EmpresaRepository implements Serializable, Repository<Empresa> {
         return dao.listaTodosPaginada(firstResult, maxResults);
     }
 
-    public List<Empresa> pesquisar(String textoDePesquisa){
-        return dao.listaTodos().stream()
-                .filter(x -> x.getRazaoSocial().contains(textoDePesquisa))
-                .limit(100)
-                .collect(Collectors.toList());
+    public List<Empresa> pesquisar(String textoDePesquisa) {
+        String jpqlEmpresa = "select u from Empresa u where u.razaoSocial like :pNome";
+        TypedQuery<Empresa> queryEmpresa = this.em.createQuery(jpqlEmpresa, Empresa.class);
+        queryEmpresa.setParameter("pNome", "%" + textoDePesquisa + "%");
+        try {
+            return queryEmpresa.getResultList();
+        } catch(NoResultException ex) {
+            System.out.println(this.em);
+        }
+        return new ArrayList<>();
     }
 }

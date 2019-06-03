@@ -46,17 +46,10 @@ public class UfRepository implements Serializable, Repository<Uf> {
 		dao.remove(uf);
 	}
 
-//	public List<Uf> pesquisar(String textoDePesquisa){
-//		return dao.listaTodos().stream()
-//				.filter(x -> x.getNome().contains(textoDePesquisa)
-//						|| x.getSigla().contains(textoDePesquisa))
-//				.collect(Collectors.toList());
-//	}
-
 	public List<Uf> pesquisar(String textoDePesquisa) {
-		String jpqlUf = "select u from Uf u where u.sigla like :pNome";
+		String jpqlUf = "select u from Uf u where u.nome like :pNome";
 		TypedQuery<Uf> queryUf = this.em.createQuery(jpqlUf, Uf.class);
-		queryUf.setParameter("pNome", textoDePesquisa);
+		queryUf.setParameter("pNome", "%" + textoDePesquisa + "%");
 		try {
 			return queryUf.getResultList();
 		} catch(NoResultException ex) {
