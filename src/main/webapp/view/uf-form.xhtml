@@ -12,7 +12,7 @@
 
 	<h:form id="frmPesquisa" >
 		<p:panel style="width: 100%;" rendered="#{ufBean.mostraPesquisa}">
-			<p:outputLabel value="Cidade: " for="nomePesquisa" style="width: 200px;" />
+			<p:outputLabel value="Uf: " for="nomePesquisa" style="width: 200px;" />
 			<p:inputText id="nomePesquisa" value="#{ufBean.nome}" />
 
 			<p:commandButton value="Pesquisar"
@@ -62,7 +62,7 @@
 			
 			<p:ajax event="rowSelect" update=":frmAcoes" />
 			
-			<p:column headerText="Cidade">
+			<p:column headerText="Uf">
 				<h:outputText value="#{uf.nome}" />
 			</p:column>
 
