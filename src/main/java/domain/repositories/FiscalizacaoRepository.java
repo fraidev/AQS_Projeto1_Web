@@ -1,6 +1,8 @@
 package domain.repositories;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,4 +60,8 @@ public class FiscalizacaoRepository implements Serializable, Repository<Fiscaliz
                 .limit(100)
                 .collect(Collectors.toList());
     }
+
+//    public List<Fiscalizacao> fiscalizacaosByDate (LocalDate date){
+//        listaTodos
+//    }
 }

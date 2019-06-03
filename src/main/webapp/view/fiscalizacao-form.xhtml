@@ -109,17 +109,19 @@
 			<p:calendar id="Data" pattern="dd/MM/yyyy" mask="true" converter="localDateConverter" value="#{fiscalizacaoBean.fiscalizacao.data}" />
 
 			<p:outputLabel for="Empresa" value="Empresa:" />
-			<p:selectOneMenu id="Empresa" value="#{fiscalizacaoBean.fiscalizacao.empresa}" style="width:125px">
+			<p:selectOneMenu id="Empresa" value="#{fiscalizacaoBean.fiscalizacao.empresa}" style="width:225px">
 				<f:selectItems value="#{empresaBean.todos}" var="empresa" itemLabel="#{empresa.razaoSocial}" itemValue="#{empresa}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel for="Fiscal1" value="Fiscal 1:" />
-			<p:selectOneMenu id="Fiscal1" value="#{fiscalizacaoBean.fiscalizacao.fiscal1}" style="width:125px">
+			<p:selectOneMenu id="Fiscal1" value="#{fiscalizacaoBean.fiscalizacao.fiscal1}" style="width:225px">
+				<f:selectItem itemLabel="Fiscal não selecionado" itemValue="" />
 				<f:selectItems value="#{fiscalBean.todos}" var="fiscal1" itemLabel="#{fiscal1.nome}" itemValue="#{fiscal1}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel for="Fiscal2" value="Fiscal 2:" />
-			<p:selectOneMenu id="Fiscal2" value="#{fiscalizacaoBean.fiscalizacao.fiscal2}" style="width:125px">
+			<p:selectOneMenu id="Fiscal2" value="#{fiscalizacaoBean.fiscalizacao.fiscal2}" style="width:225px">
+				<f:selectItem itemLabel="Fiscal não selecionado" itemValue="" />
 				<f:selectItems value="#{fiscalBean.todos}" var="fiscal2" itemLabel="#{fiscal2.nome}" itemValue="#{fiscal2}" />
 			</p:selectOneMenu>
 		</p:panelGrid>

@@ -122,14 +122,22 @@ public class FiscalizacaoBean implements Serializable {
 	}
 
 	@Transacional
-	public void confirmaInclusao(){
+	public void confirmaInclusao() throws Exception {
+		if(!isFiscalizacaoValid()){
+			throw new Exception("Fiscalizacao Invalida");
+		}
+
 		this.fiscalizacaoRepository.atualiza(fiscalizacao);
 		status = Status.pesquisando;
 		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 	}
 
 	@Transacional
-	public void confirmaAlteracao() {
+	public void confirmaAlteracao() throws Exception {
+		if(!isFiscalizacaoValid()){
+			throw new Exception("Fiscalizacao Invalida");
+		}
+
 		this.fiscalizacaoRepository.atualiza(fiscalizacao);
 		this.selected = null;
 		status = Status.pesquisando;
@@ -141,6 +149,14 @@ public class FiscalizacaoBean implements Serializable {
 		this.fiscalizacaoRepository.remove(selected);
 		this.selected = null;
 		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
+	}
+
+	public boolean isFiscalizacaoValid(){
+		if(fiscalizacao.getFiscal1().equals(fiscalizacao.getFiscal2())){
+			return false;
+		}
+
+		return true;
 	}
 
 	@PostConstruct
