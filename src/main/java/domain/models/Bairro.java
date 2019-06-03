@@ -16,7 +16,7 @@ public class Bairro  implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	@Column(name = "cnpj")
+	@Column(name = "nome")
 	private String nome;
 	@OneToMany(mappedBy="bairro")
 	private List<Empresa> Empresas;

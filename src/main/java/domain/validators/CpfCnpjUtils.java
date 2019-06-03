@@ -1,4 +1,4 @@
-package domain.services;
+package domain.validators;
 
 public abstract class CpfCnpjUtils {
 

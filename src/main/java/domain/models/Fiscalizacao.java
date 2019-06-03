@@ -26,7 +26,7 @@ public class Fiscalizacao implements Serializable {
 	@JoinColumn(name="fiscal2Id")
 	private Fiscal fiscal2;
 
-	@OneToMany(mappedBy = "fiscalizacao", cascade = CascadeType.DETACH)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "fiscalizacao", cascade = CascadeType.ALL)
 	private List<Ocorrencia> ocorrencias = new ArrayList<>();
 
 	@ManyToOne(optional = false)

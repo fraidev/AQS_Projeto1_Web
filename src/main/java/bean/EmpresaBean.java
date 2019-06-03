@@ -6,7 +6,7 @@ import domain.repositories.BairroRepository;
 import domain.repositories.CidadeRepository;
 import domain.repositories.EmpresaRepository;
 import domain.repositories.UfRepository;
-import domain.services.CpfCnpjUtils;
+import domain.validators.CpfCnpjUtils;
 import infrastructure.tx.Transacional;
 
 import java.io.Serializable;
