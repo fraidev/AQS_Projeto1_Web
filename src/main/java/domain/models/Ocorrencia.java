@@ -2,6 +2,8 @@ package domain.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,9 +18,8 @@ public class Ocorrencia implements Serializable {
     private String codigo;
     @Column(name = "nome")
     private String nome;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="fiscalizacaoId")
-    private Fiscalizacao fiscalizacao;
+    @ManyToMany(mappedBy="ocorrencias", fetch = FetchType.EAGER)
+    private List<Fiscalizacao> fiscalizacao = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -32,10 +33,10 @@ public class Ocorrencia implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public Fiscalizacao getFiscalizacao() {
+    public List<Fiscalizacao> getFiscalizacao() {
         return fiscalizacao;
     }
-    public void setFiscalizacao(Fiscalizacao fiscalizacao) {
+    public void setFiscalizacao(List<Fiscalizacao> fiscalizacao) {
         this.fiscalizacao = fiscalizacao;
     }
     public String getCodigo() {
@@ -43,6 +44,9 @@ public class Ocorrencia implements Serializable {
     }
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+    public String getOcorrenciaCodigoNome(){
+        return this.codigo + "-" + this.nome;
     }
 
     @Override

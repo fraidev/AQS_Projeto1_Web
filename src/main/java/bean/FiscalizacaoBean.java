@@ -6,6 +6,7 @@ import domain.models.Ocorrencia;
 import domain.repositories.FiscalRepository;
 import domain.repositories.FiscalizacaoRepository;
 import domain.models.Fiscalizacao;
+import domain.repositories.OcorrenciaRepository;
 import infrastructure.tx.Transacional;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class FiscalizacaoBean implements Serializable {
 	private FiscalizacaoRepository fiscalizacaoRepository;
 	@Inject
 	private FiscalRepository fiscalRepository;
+	@Inject
+	private OcorrenciaRepository ocorrenciaRepository;
 	private Fiscalizacao fiscalizacao;
 	private Ocorrencia ocorrenciaEdicao;
 	private Fiscalizacao selected;
@@ -44,13 +47,11 @@ public class FiscalizacaoBean implements Serializable {
 
 	public void solicitaIncluir() {
 		this.fiscalizacao = new Fiscalizacao();
-		this.ocorrenciaEdicao = new Ocorrencia();
 		status = Status.incluindo;
 	}
 
 	public void solicitaAlterar() {
 		this.fiscalizacao = selected;
-		this.ocorrenciaEdicao = new Ocorrencia();
 		status = Status.alterando;
 	}
 
@@ -112,12 +113,8 @@ public class FiscalizacaoBean implements Serializable {
 	}
 
 	public void criaOcorrencia(){
-		Ocorrencia ocorrencia = new Ocorrencia();
-		ocorrencia.setCodigo(this.ocorrenciaEdicao.getCodigo());
-		ocorrencia.setNome(this.ocorrenciaEdicao.getNome());
-//		ocorrencia.setId(UUID.randomUUID());
-		ocorrencia.setFiscalizacao(this.fiscalizacao);
-
+		this.ocorrenciaEdicao.getFiscalizacao().add(this.fiscalizacao);
+		Ocorrencia ocorrencia = this.ocorrenciaRepository.buscaPorId(this.ocorrenciaEdicao.getId());
 		this.fiscalizacao.getOcorrencias().add(ocorrencia);
 	}
 
