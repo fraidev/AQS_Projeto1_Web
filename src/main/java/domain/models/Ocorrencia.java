@@ -33,10 +33,10 @@ public class Ocorrencia implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public List<Fiscalizacao> getFiscalizacao() {
+    public List<Fiscalizacao> getFiscalizacoes() {
         return fiscalizacao;
     }
-    public void setFiscalizacao(List<Fiscalizacao> fiscalizacao) {
+    public void setFiscalizacoes(List<Fiscalizacao> fiscalizacao) {
         this.fiscalizacao = fiscalizacao;
     }
     public String getCodigo() {

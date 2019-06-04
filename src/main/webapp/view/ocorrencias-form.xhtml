@@ -12,6 +12,7 @@
     <p:messages autoUpdate="true" showDetails="true" visibility="info"/>
 
     <h:form id="frmPesquisa" >
+        <p:outputLabel value="Ocorrencia" style="font-size: 40pt;" />
         <p:panel style="width: 100%;" rendered="#{ocorrenciaBean.mostraPesquisa}">
             <p:outputLabel value="Nome ou codigo da Ocorrencia: " for="nomePesquisa" style="width: 200px;" />
             <p:inputText id="nomePesquisa" value="#{ocorrenciaBean.nome}" />

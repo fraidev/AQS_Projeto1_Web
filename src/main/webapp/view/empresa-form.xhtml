@@ -11,6 +11,7 @@
 <h:body>
 
 	<h:form id="frmPesquisa" >
+		<p:outputLabel value="Empresa" style="font-size: 40pt;" />
 		<p:panel style="width: 100%;" rendered="#{empresaBean.mostraPesquisa}">
 			<p:outputLabel value="Razão Social: " for="nomePesquisa" style="width: 200px;" />
 			<p:inputText id="nomePesquisa" value="#{empresaBean.nome}" />

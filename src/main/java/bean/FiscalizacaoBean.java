@@ -11,7 +11,6 @@ import infrastructure.tx.Transacional;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -113,7 +112,7 @@ public class FiscalizacaoBean implements Serializable {
 	}
 
 	public void criaOcorrencia(){
-		this.ocorrenciaEdicao.getFiscalizacao().add(this.fiscalizacao);
+		this.ocorrenciaEdicao.getFiscalizacoes().add(this.fiscalizacao);
 		Ocorrencia ocorrencia = this.ocorrenciaRepository.buscaPorId(this.ocorrenciaEdicao.getId());
 		this.fiscalizacao.getOcorrencias().add(ocorrencia);
 	}

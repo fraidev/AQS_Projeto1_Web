@@ -3,6 +3,7 @@ package bean;
 import bean.models.Status;
 import domain.repositories.FiscalRepository;
 import domain.models.Fiscal;
+import domain.validators.CpfCnpjUtils;
 import infrastructure.tx.Transacional;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -94,6 +95,9 @@ public class FiscalBean implements Serializable {
 
     @Transacional
     public void confirmaInclusao(){
+        if(isValid()){
+            return;
+        }
         this.fiscalRepository.adiciona(fiscal);
         status = Status.pesquisando;
         this.fiscais = fiscalRepository.listaTodos();
@@ -101,6 +105,9 @@ public class FiscalBean implements Serializable {
 
     @Transacional
     public void confirmaAlteracao() {
+        if(isValid()){
+            return;
+        }
         this.fiscalRepository.atualiza(fiscal);
         this.selected = null;
         status = Status.pesquisando;
@@ -112,6 +119,13 @@ public class FiscalBean implements Serializable {
         this.fiscalRepository.remove(selected);
         this.selected = null;
         this.fiscais = fiscalRepository.listaTodos();
+    }
+
+    public boolean isValid(){
+        if(CpfCnpjUtils.isCPF(this.fiscal.getCpf())){
+            return true;
+        }
+        return false;
     }
 
     @PostConstruct
