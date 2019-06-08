@@ -9,7 +9,11 @@
 </h:head>
 
 <h:body>
-    <p:messages autoUpdate="true" showDetails="true" visibility="info"/>
+    <h:form>
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+    </h:form>
 
     <h:form id="frmPesquisa" >
         <p:outputLabel value="Ocorrencia" style="font-size: 40pt;" />

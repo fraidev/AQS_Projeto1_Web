@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -95,9 +97,10 @@ public class FiscalBean implements Serializable {
 
     @Transacional
     public void confirmaInclusao(){
-        if(isValid()){
+        if(!isValidFiscal()){
             return;
         }
+
         this.fiscalRepository.adiciona(fiscal);
         status = Status.pesquisando;
         this.fiscais = fiscalRepository.listaTodos();
@@ -105,9 +108,10 @@ public class FiscalBean implements Serializable {
 
     @Transacional
     public void confirmaAlteracao() {
-        if(isValid()){
+        if(!isValidFiscal()){
             return;
         }
+
         this.fiscalRepository.atualiza(fiscal);
         this.selected = null;
         status = Status.pesquisando;
@@ -121,11 +125,13 @@ public class FiscalBean implements Serializable {
         this.fiscais = fiscalRepository.listaTodos();
     }
 
-    public boolean isValid(){
-        if(CpfCnpjUtils.isCPF(this.fiscal.getCpf())){
-            return true;
+    public boolean isValidFiscal(){
+        if(!CpfCnpjUtils.isValid(this.fiscal.getCpf())){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Cpf Invalido."));
+            return false;
         }
-        return false;
+
+        return true;
     }
 
     @PostConstruct

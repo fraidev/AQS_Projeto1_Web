@@ -10,6 +10,12 @@
 
 <h:body>
 
+    <h:form>
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+    </h:form>
+
     <h:form id="frmPesquisa" >
         <p:outputLabel value="Fiscal" style="font-size: 40pt;" />
         <p:panel style="width: 100%;" rendered="#{fiscalBean.mostraPesquisa}">

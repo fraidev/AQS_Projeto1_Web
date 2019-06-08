@@ -123,7 +123,7 @@ public class FiscalizacaoBean implements Serializable {
 			throw new Exception("Fiscalizacao Invalida");
 		}
 
-		this.fiscalizacaoRepository.atualiza(fiscalizacao);
+		this.fiscalizacaoRepository.adiciona(fiscalizacao);
 		status = Status.pesquisando;
 		this.fiscalizacaos = fiscalizacaoRepository.listaTodosPaginada(0, 100);
 	}

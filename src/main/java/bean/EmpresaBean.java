@@ -135,7 +135,7 @@ public class EmpresaBean implements Serializable {
 
 	@Transacional
 	public void confirmaInclusao(){
-		if(!CpfCnpjUtils.isValidCNPJ(empresa.getCnpj())){
+		if(!CpfCnpjUtils.isValid(empresa.getCnpj())){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "CNPJ Invalidado."));
 			return;
 		}
@@ -147,7 +147,7 @@ public class EmpresaBean implements Serializable {
 
 	@Transacional
 	public void confirmaAlteracao() {
-		if(!CpfCnpjUtils.isValidCNPJ(empresa.getCnpj())) {
+		if(!CpfCnpjUtils.isValid(empresa.getCnpj())) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "CNPJ Invalidado."));
 			return;
 		}
